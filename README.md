@@ -18,6 +18,10 @@
 - Could possibly use YouTube API (think it's free, we just need an API key). Displays a popular YouTube channel name and subscriber count on left column, on right column is another popular YouTube channel name with no subscriber count. User has to guess whether the account on the right has a higher or lower subscriber count than the channel on the left. If they guess correctly the channel on the right switches to the left and a new random popular channel displays on the right. Saves high scores.
 - User story: As someone who enjoys games and works/travels, I want a simple mobile game, so I can enjoy down time when I'm not at home.
 
+### Outside Health
+- BreezoMeter Pollen and IQAir APIs. User enters city, app displays air quality, allergen info, and weather so the user can have a more comfortable time in their city/town. User can save a list of cities/towns for easy comparison.
+- User story: As someone with allergies living in a polluted city, I want to know whether the outdoors is actively trying to harm me, so I know what days to limit outdoor exposure.
+
 ## Project Requirements
 - Must use at least two server-side APIs
 - Must use a CSS framework other than Bootstrap (Pure was our choice on Monday night)
