@@ -1,33 +1,35 @@
-* {
-    display: flexbox;
+*,
+*::before
+*::after {
+    margin: auto;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
-.title {
-    font: 500;
-    font-weight: 400;
-    
+/* 1792x828px at 326ppi IPHONE XR*/
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 2) { 
 }
 
-.palette .pure-g {
-
+/* 2688x1242px at 458ppi IPHONE XS MAX*/
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 3) { 
 }
 
-.block {
-
+/* 1792x828px at 326ppi IPHONE 11*/
+@media only screen 
+    and (device-width: 414px) 
+    and (device-height: 896px) 
+    and (-webkit-device-pixel-ratio: 2) { 
 }
 
-.generateBtn {
-
+.pure-g [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: Georgia, Times, "Times New Roman", serif;
 }
 
-.saveBtn {
-    
-}
 
-.textExample {
-
-}
-
-.savedPalettes {
-
-}
