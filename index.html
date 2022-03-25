@@ -1,43 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <title>Document</title>
-</head>
-<body>
-    <!--Example content to test locking-->
-    <span class="colorBlock" data-color-id="1"> 1</span>
-    <span class="colorBlock" data-color-id="2"> 2</span>
-    <span class="colorBlock" data-color-id="3"> 3</span>
-    <span class="colorBlock" data-color-id="4"> 4</span>
-    <span class="colorBlock" data-color-id="5"> 5</span>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/script.js" ></script>
-</body>
-</html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href ="./assets/main.css">
     <title>I made you a Palette</title> 
 </head>
-<body>
+<div>
     <header>
         <a href="#" class="title">i made you a palette</a>
     </header>
-    <div class="palette">
+    <div class="palette pure-g">
         <ul>
-            <li id="block1"></li>
-            <li id="block2"></li>
-            <li id="block3"></li>
-            <li id="block4"></li>
-            <li id="block5"></li>
+            <li class="block" id="block1"><div class="pure-u-1-5"></div></li>
+            <li class="block" id="block2"><div class="pure-u-1-5"></div></li>
+            <li class="block" id="block3"><div class="pure-u-1-5"></div></li>
+            <li class="block" id="block4"><div class="pure-u-1-5"></div></li>
+            <li class="block" id="block5"><div class="pure-u-1-5"></div></li>
         </ul>
     </div>
+</div>
+</body>
     <div class="generateBtn"></div>
     <div class="saveBtn"></div>
     <div class="textExample"></div>
