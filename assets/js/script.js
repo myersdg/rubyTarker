@@ -1,3 +1,4 @@
+const buttonEl = document.getElementById('generate-colors');
 
 var palette =[
     {
@@ -21,6 +22,13 @@ var palette =[
         'locked': false
     }
 ];
+
+// Array will populate with HSL values, not RGB values
+// Colors are sorted darkest to lightest
+let hslPalette = {
+    unsorted: [],
+    sorted: [],
+};
 
 var color= {
     'rgb': [133, 42, 244],
@@ -58,15 +66,65 @@ $(".colorBlock").on("click", function() {
     console.log(palette[position]);
 });
 
-// Displays colors ordered from darkest to lightest in color blocks
-const showNewColors = function(rgbColors) {
-    // Create an array of HSV colors sorted darkest to lightest
-    let hsvColors = sortColors(rgbColors);
+const requestColorPalette = function() {
+    
+    var url = "http://colormind.io/api/";
+    var data = {
+        model : "default",
+        input : ["N","N","N","N","N"]
+    }
 
-    // Update each color block with a background color from our sorted array
-    for (let i=0; i < hsvColors.length; i++) {
+    // Check palette to see if any colors are locked
+    for (let i=0; i < palette.length; i++) {
+        if (palette[i].locked) {
+            // Update locked colors into data.input
+            data.input[i] = palette[i].rgb;
+        }
+    }
+
+    var http = new XMLHttpRequest();
+
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var rgbColors = JSON.parse(http.responseText).result;
+            return updatePalette(rgbColors);
+        }
+    }
+
+    http.open("POST", url, true);
+    http.send(JSON.stringify(data));
+}
+
+// Updates palette object with new rgb values
+const updatePalette = function(rgbColors) {
+    for (let i=0; i < palette.length; i++) {
+        palette[i].rgb = rgbColors[i];
+    }
+
+    // Empty out arrays prior to populating
+    hslPalette.sorted = [];
+    hslPalette.unsorted = [];
+
+    // Update sorted HSL array
+    let hslColorsSorted = sortColors(rgbColors);
+    hslPalette.sorted = hslColorsSorted;
+
+    // Update unsorted HSL array
+    for (let i=0; i < 5; i++) {
+        hslColor = rgbToHsl(rgbColors[i][0], rgbColors[i][1], rgbColors[i][2])
+        hslPalette.unsorted.push(hslColor);
+    }
+
+    return showNewColors();
+}
+
+// Displays colors ordered from darkest to lightest in color blocks
+const showNewColors = function() {
+
+    // Update each color block with a background color from our unsorted array
+    for (let i=0; i < palette.length; i++) {
         let colorBlockEl = document.querySelector(`[data-color-id="${i+1}"]`)
-        colorBlockEl.style.backgroundColor = `hsl(${hsvColors[i][0]}, ${hsvColors[i][1]}%, ${hsvColors[i][2]}%)`;
+        colorBlockEl.style.backgroundColor = `hsl(${hslPalette.unsorted[i][0]}, ${hslPalette.unsorted[i][1]}%, ${hslPalette.unsorted[i][2]}%)`;
     }
 
     return true;
@@ -77,7 +135,7 @@ const sortColors = function(rgbColors) {
     let hsvColors = [];
     let sortedHsvColors = [];
 
-    // Iterate through each RGB color, convert to HSL, populate HSV color list
+    // Iterate through each RGB color, convert to HSL, populate HSV color array
     for (let index in rgbColors) {
         // Current RGB color being converted to HSL
         let colorValues = rgbColors[index]
@@ -111,26 +169,6 @@ const sortColors = function(rgbColors) {
     return sortedHsvColors;
 }
 
-const requestColorPalette = function() {
-    
-    var url = "http://colormind.io/api/";
-    var data = {
-        model : "default",
-    }
-
-    var http = new XMLHttpRequest();
-
-    http.onreadystatechange = function() {
-        if(http.readyState == 4 && http.status == 200) {
-            var rgbColors = JSON.parse(http.responseText).result;
-            return showNewColors(rgbColors);
-        }
-    }
-
-    http.open("POST", url, true);
-    http.send(JSON.stringify(data));
-}
-
 // Function from https://www.30secondsofcode.org/js/s/rgb-to-hsl
 // Converts RBG values to HSL color values
 // Expects integers as arguments, returns an array of integers
@@ -154,4 +192,4 @@ const rgbToHsl = function(r, g, b) {
     ];
   };
 
-requestColorPalette();
+buttonEl.addEventListener('click', requestColorPalette);
