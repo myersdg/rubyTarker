@@ -1,4 +1,6 @@
 
+// Colormind returns an array of 5 rgb colors as an array of 3 element arrays.
+//  We can store as an array objects with rgb color and lock status
 var palette =[
     {
         'rgb': [133, 42, 244],
@@ -22,13 +24,15 @@ var palette =[
     }
 ];
 
+// Use for individual color manipulation
 var color= {
     'rgb': [133, 42, 244],
     'locked': false
 };
 
 console.log(color.lock);
-
+/* 
+// Basic API call to colormind
 var url = "http://colormind.io/api/";
 var data = {
 	model : "default",
@@ -46,6 +50,7 @@ http.onreadystatechange = function() {
 
 http.open("POST", url, true);
 http.send(JSON.stringify(data));
+*/
 
 // Sets locked to true
 // Any function that updates colors will need to check if locked before updating the color
