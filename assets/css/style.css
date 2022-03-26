@@ -9,19 +9,19 @@
 }
 
 /* 1792x828px at 326ppi for IPHONE XR, 11*/
-@media only screen (max-width: 414px) {
+@media only screen 
     and (device-width : 414px) 
     and (device-height : 896px) 
     and (-webkit-device-pixel-ratio : 2)
-    and (orientation : portrait) 
+    and (orientation : portrait) {
 }
 
 /* 2688x1242px at 458ppi for IPHONE XS MAX */
-@media only screen (max-width: 414px) {
+@media only screen 
     and (device-width : 414px) 
     and (device-height : 896px) 
     and (-webkit-device-pixel-ratio : 3)
-    and (orientation : portrait) 
+    and (orientation : portrait) {
 }
 
 body {
