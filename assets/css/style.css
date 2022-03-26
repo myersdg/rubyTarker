@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url();
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+/* 1792x828px at 326ppi for IPHONE XR, 11*/
+@media only screen (max-width: 414px) {
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 2)
+    and (orientation : portrait) 
+}
+
+/* 2688x1242px at 458ppi for IPHONE XS MAX */
+@media only screen (max-width: 414px) {
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 3)
+    and (orientation : portrait) 
+}
+
+body {
+    padding-top: 70px;
+}
+
+.title-container {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.title {
+    margin-top: 0px;
+    font-size: larger;
+    background-color: #272f2a;
+    border: 10px solid #272f2a;
+    border-radius: 40px;
+    height: auto;
+    color: white;
+}
+
+.pure-g {
+    margin: 80px 20px 0px 20px;
+}
+
+img {
+    width: 100%;
+    border-style: solid;
+    display: grid;
+}
+
+.palette div div {
+    margin: 5px;
+}
+
+
+

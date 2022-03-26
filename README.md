@@ -31,3 +31,18 @@
 - Does NOT use alerts, confirms, or prompts (look into modals)
 - Must be deployed to GitHub Pages
 - Must be interactive (i.e., accept and respond to user input)
+
+----------------------------------------------------------------
+
+# Website Color Palette Generator  
+
+## WCPG Title Ideas
+-   Nothing Rhymes With Orange 
+-   Palette for Color Lovers
+-   Color Coded 
+
+## WCPG General ToDo List
+-   Website description 
+-   Issue updates
+-   Multiple commits
+-   Title pick
