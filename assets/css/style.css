@@ -40,10 +40,11 @@ h1 {
 .title {
     margin-top: 0px;
     font-size: larger;
-    background-color: red;
-    border: 10px solid red;
+    background-color: #272f2a;
+    border: 10px solid #272f2a;
     border-radius: 40px;
     height: auto;
+    color: white;
 }
 
 .pure-g {
