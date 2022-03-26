@@ -1,8 +1,21 @@
+// TODO JAVASCRIPT BASIC FUNCTIONALITY:
+// Function to update elements on page to new colors, take RGB values from palette
+// Function to fetch request from Unsplash, returns a URL to a black and white background image
+// Function to update hero element on page after fetch from Unsplash (Unsplash requires we display the artists URL somewhere on the page)
+// Function to show user the locked status, calls from anonymous onclick function
+// Update anonymous onclick function to disable locking
+// Function to update global array variable for saved design(s), executes on page load and after user clicks save design
+// Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
+// Function to update saved favorites on the sidebar, 
+// TODO JAVASCRIPT EXTRA FUNCTIONALITY (NOT APART OF MVP):
+// Function to check background image for lightness (so that a predominantly dark backgrounds aren't selected) (potentially could use - https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script)
+// If background image is too dark for overlay color to appear, choose another picture
+
 const buttonEl = document.getElementById('generate-colors');
 
 // Colormind returns an array of 5 rgb colors as an array of 3 element arrays.
 //  We can store as an array objects with rgb color and lock status
-var palette =[
+var palette = [
     {
         'rgb': [133, 42, 244],
         'locked': false
