@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: url();
     font-family: Georgia, Times, "Times New Roman", serif;
 }
 
@@ -25,7 +24,7 @@
 }
 
 body {
-    padding-top: 70px;
+    padding-top: 100px;
 }
 
 .title-container {
@@ -48,13 +47,19 @@ h1 {
 }
 
 .pure-g {
-    margin: 80px 20px 0px 20px;
+    margin: 90px 20px 0px 20px;
 }
 
 img {
     width: 100%;
-    border-style: solid;
+    border: none;
     display: grid;
+}
+
+.background-img {
+    background-image: url("/assets/images/background.png");
+    height: 100%;
+    background-position: center;
 }
 
 .palette div div {
@@ -65,7 +70,7 @@ img {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 80px;
+    margin-top: 90px;
 }
 
 .generateBtn {
@@ -74,7 +79,6 @@ img {
     border-radius: 20px;
     background-color: #c81a15;
     color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .saveBtn {
@@ -83,7 +87,6 @@ img {
     border-radius: 20px;
     background-color: #7dcccb;
     color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 
