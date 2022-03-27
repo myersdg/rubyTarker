@@ -73,6 +73,10 @@ img {
     margin-top: 90px;
 }
 
+button:focus {
+    outline: 1px solid white;
+}
+
 .generateBtn {
     padding: 10px;
     border: none;
