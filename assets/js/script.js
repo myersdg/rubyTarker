@@ -52,33 +52,16 @@ var color= {
     'locked': false
 };
 
-console.log(color.lock);
-/* 
-// Basic API call to colormind
-var url = "http://colormind.io/api/";
-var data = {
-	model : "default",
-	input : [[44,43,44],[90,83,82],"N","N","N"]
-};
-
-var http = new XMLHttpRequest();
-
-http.onreadystatechange = function() {
-	if(http.readyState == 4 && http.status == 200) {
-		var palette = JSON.parse(http.responseText).result;
-    console.log(palette);
-	}
-};
-
-http.open("POST", url, true);
-http.send(JSON.stringify(data));
-*/
 
 // Sets locked to true
 // Any function that updates colors will need to check if locked before updating the color
-$(".colorBlock").on("click", function() {
-    //search for position id
-    var position = this.getAttribute("data-color-id") - 1;
+$(".palette").on("click", "span", function() {
+    //search for position id colBlock1
+    var id = this.getAttribute("id");
+    console.log(id);
+    var i = id.length - 1;
+    console.log(i);
+    var position = id[i];
     console.log(position);
 
     palette[position].locked = true;
