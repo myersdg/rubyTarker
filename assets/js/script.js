@@ -45,14 +45,29 @@ let hslPalette = {
     sorted: [],
 };
 
-// Use for individual color manipulation
-var color= {
-    'rgb': [133, 42, 244],
-    'locked': false
+// Remove dom element from view but not the consumed space
+var hideContent = function (element) {
+    $(element).removeClass( "visible" ).addClass( "hidden" );
+};
+
+var showContent = function (element) {
+    $(element).removeClass( "hidden" ).addClass( "visible" );
 };
 
 // Function to show user the locked status, calls from anonymous onclick function
-
+var displayLockedStatus = function (locked, i) {
+   var selector = "[data-locked=" + i + "]";
+    console.log($(selector));
+    console.log(selector);
+   
+    var iconEL = $(selector);
+    if(locked) {
+        showContent(iconEL);
+    } else {
+        hideContent(iconEL);
+    }
+    
+};
 
 // Sets locked to true, if the color is not locked else unlocks and sets to false
 // Any function that updates colors will need to check if locked before updating the color
@@ -67,7 +82,8 @@ $(".palette").on("click", "span", function() {
     } else {
         palette[position].locked = true;
     }
-    console.log(palette[position]);
+    displayLockedStatus(palette[position].locked, id[i]);
+    //console.log(palette[position]);
 });
 
 const requestColorPalette = function() {
