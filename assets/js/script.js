@@ -2,7 +2,6 @@
 // Function to update elements on page to new colors, take RGB values from palette
 // Function to fetch request from Unsplash, returns a URL to a black and white background image
 // Function to update hero element on page after fetch from Unsplash (Unsplash requires we display the artists URL somewhere on the page)
-// Function to show user the locked status, calls from anonymous onclick function
 // Update anonymous onclick function to disable locking
 // Function to update global array variable for saved design(s), executes on page load and after user clicks save design
 // Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
@@ -52,19 +51,22 @@ var color= {
     'locked': false
 };
 
+// Function to show user the locked status, calls from anonymous onclick function
 
-// Sets locked to true
+
+// Sets locked to true, if the color is not locked else unlocks and sets to false
 // Any function that updates colors will need to check if locked before updating the color
 $(".palette").on("click", "span", function() {
     //search for position id colBlock1
     var id = this.getAttribute("id");
-    console.log(id);
     var i = id.length - 1;
-    console.log(i);
-    var position = id[i];
-    console.log(position);
+    var position = id[i] - 1;
 
-    palette[position].locked = true;
+    if (palette[position].locked) {
+        palette[position].locked = false;
+    } else {
+        palette[position].locked = true;
+    }
     console.log(palette[position]);
 });
 
