@@ -56,14 +56,12 @@ img {
     display: grid;
 }
 
-/*
-Commented out as it is causing an error
 .background-img {
-    background-image: url("/assets/images/background.png");
+    background-image: url("../images/background.png");
     height: 100%;
     background-position: center;
 }
-*/
+
 .palette div div {
     margin: 5px;
 }
