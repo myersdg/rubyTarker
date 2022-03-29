@@ -232,7 +232,7 @@ const updateBackground = function() {
     let artistName = randomImage.user.name;
     el.innerHTML = `<span>Photo by <a href="${artistUrl}?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">${artistName}</a> on <a href="https://unsplash.com/?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">Unsplash</a></span>`
     // Update all classes below separated by commas
-    footerEl.classList.add('ADD', 'CLASSES', 'HERE')
+    el.classList.add('ADD', 'CLASSES', 'HERE')
     */
     
 
