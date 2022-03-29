@@ -42,6 +42,7 @@ var palette = [
     }
 ];
 
+var savedPalettes = [];
 
 // Array will populate with HSL values, not RGB values
 // Colors are sorted darkest to lightest
@@ -59,12 +60,25 @@ var showContent = function (element) {
     $(element).removeClass( "hidden" ).addClass( "visible" );
 };
 
+var updateLocalStorage = function () {
+    localStorage.setItem("palette", JSON.stringify(palette));
+};
+
+var loadLocalStorage = function () {
+    //Get saved palettes from localStorage.
+    savedPalettes = localStorage.getItem("savedPalettes");
+  
+    if (savedPalettes === null) {
+        savedPalettes = [];
+    } else {  
+        //Converts eventTasks from the string format back into an array of objects.
+        savedPalettes = JSON.parse(savedPalettes);
+    }
+};
+
 // Function to show user the locked status, calls from anonymous onclick function
 var displayLockedStatus = function (locked, i) {
    var selector = "[data-locked=" + i + "]";
-    console.log($(selector));
-    console.log(selector);
-   
     var iconEL = $(selector);
     if(locked) {
         showContent(iconEL);
@@ -88,7 +102,6 @@ $(".palette").on("click", "span", function() {
         palette[position].locked = true;
     }
     displayLockedStatus(palette[position].locked, id[i]);
-    //console.log(palette[position]);
 });
 
 const requestColorPalette = function() {
