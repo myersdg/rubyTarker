@@ -1,5 +1,5 @@
 // TODO JAVASCRIPT BASIC FUNCTIONALITY:
-// Function to update elements on page to new colors, take RGB values from palette
+// (DONE?) Function to update elements on page to new colors, take RGB values from palette
 // How do we target the SVG files and update the colors for the above function?
 // What are the class names that are being targeted for each color specifically?
 // Function to fetch request from Unsplash on page load, returns data to a black and white background image
@@ -130,10 +130,22 @@ const updatePalette = function(rgbColors) {
 // Displays colors ordered from darkest to lightest in color blocks
 const showNewColors = function() {
 
-    // Update each color block with a background color from our unsorted array
-    for (let i=0; i < palette.length; i++) {
-        let colorBlockEl = document.querySelector(`[data-color-id="${i+1}"]`)
-        colorBlockEl.style.backgroundColor = `hsl(${hslPalette.unsorted[i][0]}, ${hslPalette.unsorted[i][1]}%, ${hslPalette.unsorted[i][2]}%)`;
+    // Update each element with a class pertaining to the particular color
+    for (let i=0; i < 5; i++) {
+        let updateClass = document.querySelectorAll(`.color${i+1}`);
+        updateClass.forEach(function(element) {
+            let r = palette[i].rgb[0];
+            let g = palette[i].rgb[1];
+            let b = palette[i].rgb[2];
+
+            if (i != 4) {
+                element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+            } else {
+                element.style.color = `rgb(${r}, ${g}, ${b}`;
+                let test = document.getElementById('color-block-1');
+                test.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
+            }            
+        });
     }
 
     return true;
