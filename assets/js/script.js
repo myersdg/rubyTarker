@@ -85,22 +85,26 @@ var loadLocalStorage = function () {
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
 var showSavedPalettes = function () {
-    console.log("showSavedPalettes");
     // Update each color block with a background color from our sorted array
     for (var i=0; i < savedPalettes.length; i++) {
         var savedPaletteEL = $("<div>")
         .attr("data-saved", i);
-        console.log(savedPaletteEL);
+ 
+        var savedPal = savedPalettes[i];
 
-        for (var k= 0; k < savedPalettes[i].length; k++) {
-            var savedBlockEl = $("<span>")
-            .attr("data-saved", i);
-            console.log(savedBlockEl);
-            //savedBlockEl.style.backgroundColor = `hsl(${savedPalettes[i][0]}, ${savedPalettes[i][1]}%, ${savedPalettes[i][2]}%)`;
-            savedBlockEl.style.backgroundColor = 'rgb(' + savedPalettes[i][0] + ',' + savedPalettes[i][1] + ',' +  savedPalettes[i][2] + ')';
-            $(savedBlockEl).appendTo($(savedPaletteEL));
-        }
         $(savedPaletteEL).appendTo($("#savedPalettes"));
+        for (var k= 0; k < savedPal.length; k++) {
+            
+            var tempBlock = savedPal[k];
+            var savedBlockEl = $("<div>")
+            .text(k)
+            .addClass("savedBlock")
+            .attr("data-saved", i);
+            
+            var color = 'rgb(' + tempBlock.rgb[0] + ',' + tempBlock.rgb[1] + ',' +  tempBlock.rgb[2] + ')';
+           $(savedBlockEl).css("backgroundColor", color);
+           $(savedBlockEl).appendTo($(savedPaletteEL));
+        }
     }
 };
 
@@ -388,7 +392,7 @@ buttonEl.addEventListener('click', generateHandler);
 
 loadBackgrounds();
 loadLocalStorage();
-//showSavedPalettes();
+showSavedPalettes();
 
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
