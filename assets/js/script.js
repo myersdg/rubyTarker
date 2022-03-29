@@ -224,6 +224,9 @@ const updateBackground = function() {
     // Image URL from object
     let randomImageUrl = randomImage.urls.raw;
     backgroundEl.style.backgroundImage = `url(${randomImageUrl})`;
+    backgroundEl.style.backgroundRepeat = 'no-repeat';
+    backgroundEl.style.backgroundSize = 'cover';
+    backgroundEl.style.backgroundPosition = 'center center';
 
     /* LEAVE CODE HERE - WILL UNCOMMENT WHEN WE HAVE FOOTER STYLING
     // Attribute artist of background in footer
@@ -234,8 +237,6 @@ const updateBackground = function() {
     // Update all classes below separated by commas
     footerEl.classList.add('ADD', 'CLASSES', 'HERE')
     */
-    
-
 
     return checkBrightness(randomImageUrl);
 }
@@ -349,6 +350,7 @@ const getImageLightness = function(imageSrc,callback) {
         }
 
         var brightness = Math.floor(colorSum / (this.width*this.height));
+        img.remove();
         callback(brightness);
     }
 }
