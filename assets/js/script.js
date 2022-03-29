@@ -171,11 +171,13 @@ const requestColorPalette = function() {
             return updatePalette(rgbColors);
         }
         // NEED TO KNOW WHAT SPECIFIC STATUS WE'RE DEALING WITH WHEN API CALL DOESN'T WORK
-        // SLOW FETCHES ARE COMING FROM CORS ANYWHERE, NOT COLORMIND. HOST SERVER LOCALLY MIGHT BE FIX.
-        else if(http.status == 'INSERT ERROR STATUS HERE') {
+        // Slow fetches are from CORS anywhere
+        else if(!(http.readyState == 4 && http.status == 200)) {
+            console.log(`${http.httpReadyState} - httpReadyState`);
+            console.log(`${http.status} - status`);
             // If user doesn't have demo server access, display message with link to request
-            grantAccessEl.style.display = 'inline-block';
-            grantAccessEl.innerHTML = `<a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">Please click this link and then click the "Request temporary access to the demo server" button.</a>`
+            //grantAccessEl.style.display = 'inline-block';
+            //grantAccessEl.innerHTML = `<a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">Please click this link and then click the "Request temporary access to the demo server" button.</a>`
         }
     }
 
