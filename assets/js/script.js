@@ -11,7 +11,7 @@
 // (DONE?) Update anonymous onclick function to disable locking
 // Function to update global array variable for saved design(s), executes on page load and after user clicks save design
 // Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
-// Function to update saved favorites on the sidebar, 
+// (Done) Function to update saved favorites on the sidebar, 
 // What class or ID specifically needs to be targeted on the DOM to update the sidebar?
 // TODO JAVASCRIPT EXTRA FUNCTIONALITY (NOT APART OF MVP):
 // (DONE?) Function to check background image for lightness (so that a predominantly dark backgrounds aren't selected) (potentially could use - https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script)
@@ -89,9 +89,16 @@ var loadLocalStorage = function () {
 
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
-var showSavedPalettes = function () {
+var showSavedPalettes = function (updated) {
+    var i=0
+
+    //Save button was clicked
+    if(updated) {
+        i = savedPalettes.length - 1;
+    }
+
     // Update each color block with a background color from our sorted array
-    for (var i=0; i < savedPalettes.length; i++) {
+    for (i; i < savedPalettes.length; i++) {
         var savedPaletteEL = $("<div>")
         .attr("data-saved", i);
  
@@ -101,8 +108,7 @@ var showSavedPalettes = function () {
         for (var k= 0; k < savedPal.length; k++) {
             
             var tempBlock = savedPal[k];
-            var savedBlockEl = $("<div>")
-            .text(k)
+            var savedBlockEl = $("<span>")
             .addClass("savedBlock")
             .attr("data-saved", i);
             
@@ -403,11 +409,21 @@ buttonEl.addEventListener('click', generateHandler);
 
 loadBackgrounds();
 loadLocalStorage();
-showSavedPalettes();
+showSavedPalettes(false);
 
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
     savedPalettes.push(palette);
+    showSavedPalettes(true);
     updateLocalStorage();
+    hideElement($("#CORS"));
+});
+
+// Previously saved palette was clicked
+$("#savedPalettes").on("click", "span", function() {
+    //reload saved palette
+    var index = this.getAttribute("data-saved");
+    palette = savedPalettes[index];
+    showNewColors();
     hideElement($("#CORS"));
 });
