@@ -183,6 +183,8 @@ const requestColorPalette = function() {
             return updatePalette(rgbColors);
         }
         else {
+            console.log(`${http.readyState} - readyState`);
+            console.log(`${http.status} - http status`);
             showContent($("#CORS"));
             console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
         }
