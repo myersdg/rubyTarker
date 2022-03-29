@@ -1,8 +1,8 @@
 // TODO JAVASCRIPT BASIC FUNCTIONALITY:
 // (DONE?) Function to update elements on page to new colors, take RGB values from palette
-// How do we target the SVG files and update the colors for the above function?
-// What are the class names that are being targeted for each color specifically?
-// Function to fetch request from Unsplash on page load, returns data to a black and white background image
+// (DONE?) How do we target the SVG files and update the colors for the above function?
+// (DONE?) What are the class names that are being targeted for each color specifically?
+// (DONE?) Function to fetch request from Unsplash on page load, returns data to a black and white background image
 // After fetch request from Unsplash, update a variable with fetch data so that when the user generates a new background it doesn't have to fetch every time (we have a limit on fetches)
 // Function to update hero element on page after user clicks generate (Unsplash requires we display the artists URL somewhere on the page btw)
 // What class or ID gets targeted to update the background? What color is the background receiving?
@@ -16,6 +16,7 @@
 // If background image is too dark for overlay color to appear, choose another picture
 
 const buttonEl = document.getElementById('generate-colors');
+let backgroundImages = [];
 
 // Colormind returns an array of 5 rgb colors as an array of 3 element arrays.
 //  We can store as an array objects with rgb color and lock status
@@ -104,6 +105,12 @@ $(".palette").on("click", "span", function() {
     displayLockedStatus(palette[position].locked, id[i]);
 });
 
+// Random number generation - used for selecting background image
+const randomNum = function(min, max) {
+    let num = Math.floor(Math.random() * (max + 1 - min)) + min;
+    return num;
+  }
+
 const requestColorPalette = function() {
     
     var url = "http://colormind.io/api/";
@@ -183,6 +190,33 @@ const showNewColors = function() {
     return true;
 }
 
+// Fetches around 28 background images from Unsplash and loads them into backgroundImages array
+// Every time generate is clicked by the user, the background will be pulled randomly from backgroundImages array
+const loadBackgrounds = function() {
+    const apiUrl = 'https://api.unsplash.com/search/photos/?client_id=twHOIsQ9Yvbs3xzZqvod32i4hlZVRGHDt8kmNmVQP-E&query=background&color=black_and_white&orientation=landscape&per_page=100';
+    
+    fetch(apiUrl).then(function(response) {
+      response.json().then(function(data) {
+          // For every image in the data that isn't a sponsored image, add it to the backgroundImages array
+          for (let i=0; i < data.results.length; i++) {
+            if (data.results[i].sponsorship === null) {
+                backgroundImages.push(data.results[i]);
+            }
+          }
+      })
+    })
+}
+
+// Update background from our backgroundImages array (preloaded upon opening of page by user)
+const updateBackground = function() {
+    let backgroundEl = document.querySelector('.background-img');
+    // Image object is selected
+    let randomImage = backgroundImages[randomNum(0, backgroundImages.length - 1)]
+    // Image URL from object
+    let randomImageUrl = randomImage.urls.raw;
+    backgroundEl.style.backgroundImage = `url(${randomImageUrl})`;
+}
+
 // Takes unsorted RGB colors from Colormind and sorts them from darkest to lightest into a new array
 const sortColors = function(rgbColors) {
     let hsvColors = [];
@@ -218,7 +252,6 @@ const sortColors = function(rgbColors) {
         sortedHsvColors.splice(highestIndex, 0, hsvColors[index]);
     }
 
-    console.log(sortedHsvColors)
     return sortedHsvColors;
 }
 
@@ -245,4 +278,11 @@ const rgbToHsl = function(r, g, b) {
     ];
   };
 
-buttonEl.addEventListener('click', requestColorPalette);
+const generateHandler = function() {
+    requestColorPalette();
+    updateBackground();
+}
+
+buttonEl.addEventListener('click', generateHandler);
+
+loadBackgrounds();
