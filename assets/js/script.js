@@ -168,6 +168,9 @@ const requestColorPalette = function() {
             var rgbColors = JSON.parse(http.responseText).result;
             return updatePalette(rgbColors);
         }
+        else {
+            console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
+        }
     }
 
     http.open("POST", url, true);
