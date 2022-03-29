@@ -148,20 +148,23 @@ const showNewColors = function() {
 
     // Update each element with a class pertaining to the particular color
     for (let i=0; i < 5; i++) {
+
+        let r = palette[i].rgb[0];
+        let g = palette[i].rgb[1];
+        let b = palette[i].rgb[2];
+
         let updateClass = document.querySelectorAll(`.color${i+1}`);
         updateClass.forEach(function(element) {
-            let r = palette[i].rgb[0];
-            let g = palette[i].rgb[1];
-            let b = palette[i].rgb[2];
-
             if (i != 4) {
                 element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
             } else {
                 element.style.color = `rgb(${r}, ${g}, ${b}`;
-                let test = document.getElementById('color-block-1');
-                test.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
             }            
         });
+
+        // Update SVG icons
+        let svgIcon = document.getElementById(`color-block-${i+1}`);
+        svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
     }
 
     return true;
