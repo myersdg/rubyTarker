@@ -27,6 +27,17 @@ body {
     padding-top: 100px;
 }
 
+#grant-access {
+    background-color: white !important;
+    font-size: 36px !important;
+    width: 100% !important;
+    height: 75px !important;
+    color: black !important;
+    margin-bottom: 100px;
+    display: none;
+    text-align: center;
+}
+
 .title-container {
     width: 100%;
     text-align: center;

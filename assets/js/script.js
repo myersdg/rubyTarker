@@ -160,12 +160,21 @@ const requestColorPalette = function() {
     var http = new XMLHttpRequest();
 
     http.onreadystatechange = function() {
+        // DOM element to display message asking user to request temporary access to demo server
+        let grantAccessEl = document.getElementById('grant-access');
+
         if(http.readyState == 4 && http.status == 200) {
             var rgbColors = JSON.parse(http.responseText).result;
+            // Deletes request message after user has completed a successful API call
+            grantAccessEl.innerHTML = '';
+            grantAccessEl.style.display = 'none';
             return updatePalette(rgbColors);
         }
-        else {
-            console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
+        // NEED TO KNOW WHAT SPECIFIC STATUS WE'RE DEALING WITH WHEN API CALL DOESN'T WORK
+        else if(http.status == 'INSERT ERROR STATUS HERE') {
+            // If user doesn't have demo server access, display message with link to request
+            grantAccessEl.style.display = 'inline-block';
+            grantAccessEl.innerHTML = `<a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">Please click this link and then click the "Request temporary access to the demo server" button.</a>`
         }
     }
 
