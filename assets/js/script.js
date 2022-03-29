@@ -113,7 +113,10 @@ const randomNum = function(min, max) {
 
 const requestColorPalette = function() {
     
-    var url = "https://colormind.io/api/";
+    // CORS anywhere helps GitHub Pages accept http fetch requests
+    let corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+    var apiUrl = "http://colormind.io/api/";
+    let url = corsAnywhereUrl + apiUrl;
     var data = {
         model : "default",
         input : ["N","N","N","N","N"]
