@@ -101,6 +101,23 @@ button:focus {
     background-color: white;
 }
 
+#savedPalettesPanel {
+    max-width: 25%;
+    margin: 10px;
+    background-color: black;
+    color: white;
+}
+
+/*testing style*/
+
+.savedBlock {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    border: 2px white solid;
+}
+
 /*Utility classes*/
 .visible {
     display: inline-block;

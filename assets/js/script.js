@@ -60,12 +60,14 @@ var hideContent = function (element) {
     $(element).removeClass( "visible" ).addClass( "hidden" );
 };
 
+// Make the targeted element visible
 var showContent = function (element) {
     $(element).removeClass( "hidden" ).addClass( "visible" );
 };
 
+// Array of P
 var updateLocalStorage = function () {
-    localStorage.setItem("palette", JSON.stringify(palette));
+    localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
 };
 
 var loadLocalStorage = function () {
@@ -80,6 +82,28 @@ var loadLocalStorage = function () {
     }
 };
 
+// Display saved palettes
+// Function call commented out.  Still working on background color setting
+var showSavedPalettes = function () {
+    console.log("showSavedPalettes");
+    // Update each color block with a background color from our sorted array
+    for (var i=0; i < savedPalettes.length; i++) {
+        var savedPaletteEL = $("<div>")
+        .attr("data-saved", i);
+        console.log(savedPaletteEL);
+
+        for (var k= 0; k < savedPalettes[i].length; k++) {
+            var savedBlockEl = $("<span>")
+            .attr("data-saved", i);
+            console.log(savedBlockEl);
+            //savedBlockEl.style.backgroundColor = `hsl(${savedPalettes[i][0]}, ${savedPalettes[i][1]}%, ${savedPalettes[i][2]}%)`;
+            savedBlockEl.style.backgroundColor = 'rgb(' + savedPalettes[i][0] + ',' + savedPalettes[i][1] + ',' +  savedPalettes[i][2] + ')';
+            $(savedBlockEl).appendTo($(savedPaletteEL));
+        }
+        $(savedPaletteEL).appendTo($("#savedPalettes"));
+    }
+};
+
 // Function to show user the locked status, calls from anonymous onclick function
 var displayLockedStatus = function (locked, i) {
    var selector = "[data-locked=" + i + "]";
@@ -88,8 +112,7 @@ var displayLockedStatus = function (locked, i) {
         showContent(iconEL);
     } else {
         hideContent(iconEL);
-    }
-    
+    }    
 };
 
 // Sets locked to true, if the color is not locked else unlocks and sets to false
@@ -364,3 +387,11 @@ const generateHandler = function() {
 buttonEl.addEventListener('click', generateHandler);
 
 loadBackgrounds();
+loadLocalStorage();
+//showSavedPalettes();
+
+$(".saveBtn").on("click", function() {
+    //add current palette to array of palettes
+    savedPalettes.push(palette);
+    updateLocalStorage();
+});
