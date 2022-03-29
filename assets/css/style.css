@@ -57,7 +57,7 @@ img {
 }
 
 .background-img {
-    background-image: url("/assets/images/background.png");
+    background-image: url("../images/background.png");
     height: 100%;
     background-position: center;
 }
