@@ -171,6 +171,7 @@ const requestColorPalette = function() {
             return updatePalette(rgbColors);
         }
         // NEED TO KNOW WHAT SPECIFIC STATUS WE'RE DEALING WITH WHEN API CALL DOESN'T WORK
+        // SLOW FETCHES ARE COMING FROM CORS ANYWHERE, NOT COLORMIND. HOST SERVER LOCALLY MIGHT BE FIX.
         else if(http.status == 'INSERT ERROR STATUS HERE') {
             // If user doesn't have demo server access, display message with link to request
             grantAccessEl.style.display = 'inline-block';
