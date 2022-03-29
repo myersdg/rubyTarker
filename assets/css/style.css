@@ -126,3 +126,7 @@ button:focus {
 .hidden {
     display: hidden;
 }
+
+.invisible {
+    display: none;
+}

@@ -56,13 +56,18 @@ let hslPalette = {
 };
 
 // Remove dom element from view but not the consumed space
+var hideElement = function (element) {
+    $(element).removeClass( "visible" ).addClass( "invisible" );
+};
+
+// Remove dom element from view but not the consumed space
 var hideContent = function (element) {
     $(element).removeClass( "visible" ).addClass( "hidden" );
 };
 
 // Make the targeted element visible
 var showContent = function (element) {
-    $(element).removeClass( "hidden" ).addClass( "visible" );
+    $(element).removeClass( "hidden invisible" ).addClass( "visible" );
 };
 
 // Array of P
@@ -132,6 +137,8 @@ $(".palette").on("click", "span", function() {
     } else {
         palette[position].locked = true;
     }
+    
+    hideElement($("#CORS"));
     displayLockedStatus(palette[position].locked, id[i]);
 });
 
@@ -169,6 +176,7 @@ const requestColorPalette = function() {
             return updatePalette(rgbColors);
         }
         else {
+            showContent($("#CORS"));
             console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
         }
     }
@@ -401,4 +409,5 @@ $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
     savedPalettes.push(palette);
     updateLocalStorage();
+    hideElement($("#CORS"));
 });
