@@ -5,6 +5,7 @@
 // (DONE?) Function to fetch request from Unsplash on page load, returns data to a black and white background image
 // (DONE?) After fetch request from Unsplash, update a variable with fetch data so that when the user generates a new background it doesn't have to fetch every time (we have a limit on fetches)
 // (DONE?)Function to display background image credit when updating background
+// Function to allow user to lock background image
 // Need to know what element to update with artist credit words
 // What color is the background receiving?
 // (DONE?) Update anonymous onclick function to disable locking
