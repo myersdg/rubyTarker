@@ -53,8 +53,9 @@ h1 {
 
 svg {     
     width: 100%;
-    border: none;
+    border: 1px solid #272f2a;
     display: grid;
+    border-radius: 20px;
 }
 
 .background-img {
@@ -74,13 +75,13 @@ svg {
     margin-top: 90px;
 }
 
-button:focus {
-    outline: 1px solid white;
+button:hover {
+    outline: 2px solid white;
 }
 
 .generateBtn {
     padding: 10px;
-    border: none;
+    border: 1px solid #272f2a;
     border-radius: 20px;
     background-color: #c81a15;
     color: white;
@@ -89,7 +90,7 @@ button:focus {
 
 .saveBtn {
     padding: 10px;
-    border: none;
+    border: 1px solid #272f2a;
     border-radius: 20px;
     background-color: #7dcccb;
     color: white;
@@ -150,9 +151,9 @@ button:focus {
 }
 
 .text-border {
-    border: 3px solid #7dcccb;
+    border: 3px solid #272f2a;
     border-radius: 20px;
-    background-color: #7dcccb;
+    background-color: #272f2a;
     padding: 15px;
     width: 90%;
     margin: 10px 0px 0px 25px;
@@ -187,4 +188,12 @@ button:focus {
 .savedpal {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.saved-container {
+    padding: 10px;
+    border: #272f2a;
+    border-radius: 20px;
+    background-color: #272f2a;
+    width: 80%;
 }
