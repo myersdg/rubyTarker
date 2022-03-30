@@ -20,7 +20,8 @@
 
 const buttonEl = document.getElementById('generate-colors');
 let backgroundImages = [];
-let dark_mode = false;
+let darkMode = false;
+let errorFlag = true;
 
 // Colormind returns an array of 5 rgb colors as an array of 3 element arrays.
 //  We can store as an array objects with rgb color and lock status
@@ -145,7 +146,9 @@ $(".palette").on("click", "span", function() {
         palette[position].locked = true;
     }
     
-    hideElement($("#CORS"));
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    } 
     displayLockedStatus(palette[position].locked, id[i]);
 });
 
@@ -180,12 +183,16 @@ const requestColorPalette = function() {
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
             var rgbColors = JSON.parse(http.responseText).result;
+            errorFlag = false;
+            hideElement($("#CORS"));
             return updatePalette(rgbColors);
         }
         else {
             console.log(`${http.readyState} - readyState`);
             console.log(`${http.status} - http status`);
-            showContent($("#CORS"));
+            if (errorFlag) {
+                showContent($("#CORS"));
+            } 
             console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
         }
     }
@@ -295,7 +302,7 @@ const checkBrightness = function(imageSrc) {
         console.log(`This image has a lightness of ${brightness} on a scale of 0 (darkest) to 255 (brightest)`);
 
         if (brightness < 130) {
-            dark_mode = true;
+            darkMode = true;
             console.log('This background image should probably have light text');
         } else {
             console.log('This background image should probably have dark text');
@@ -419,7 +426,9 @@ $(".saveBtn").on("click", function() {
     savedPalettes.push(palette);
     showSavedPalettes(true);
     updateLocalStorage();
-    hideElement($("#CORS"));
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    } 
 });
 
 // Previously saved palette was clicked
@@ -428,5 +437,7 @@ $("#savedPalettes").on("click", "span", function() {
     var index = this.getAttribute("data-saved");
     palette = savedPalettes[index];
     showNewColors();
-    hideElement($("#CORS"));
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    } 
 });
