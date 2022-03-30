@@ -27,23 +27,23 @@ let errorFlag = true;
 //  We can store as an array objects with rgb color and lock status
 var palette = [
     {
-        'rgb': [133, 42, 244],
+        'rgb': [200, 26, 21],
         'locked': false
     },
     {
-        'rgb': [33, 22, 44],
+        'rgb': [254, 249, 233],
         'locked': false
     },
     {
-        'rgb': [13, 52, 24],
+        'rgb': [125, 204, 203],
         'locked': false
     },
     {
-        'rgb': [20, 60, 48],
+        'rgb': [75, 152, 153],
         'locked': false
     },
     {
-        'rgb': [226,209,167],
+        'rgb': [39, 47, 42],
         'locked': false
     }
 ];
@@ -54,7 +54,7 @@ var savedPalettes = [];
 // Colors are sorted darkest to lightest
 let hslPalette = {
     unsorted: [],
-    sorted: [],
+    sorted: [[143, 9, 17], [2, 81, 43], [181, 34, 45], [179, 44, 65], [46, 91, 95]],
 };
 
 // Remove dom element from view but not the consumed space
@@ -213,7 +213,9 @@ const updatePalette = function(rgbColors) {
 
     // Update sorted HSL array
     let hslColorsSorted = sortColors(rgbColors);
+    console.log(hslColorsSorted);
     hslPalette.sorted = hslColorsSorted;
+    console.log(hslPalette.sorted);
 
     // Update unsorted HSL array
     for (let i=0; i < 5; i++) {
@@ -221,7 +223,7 @@ const updatePalette = function(rgbColors) {
         hslPalette.unsorted.push(hslColor);
     }
 
-    return showNewColors();
+    return true;
 }
 
 // Displays colors ordered from darkest to lightest in color blocks
@@ -230,25 +232,39 @@ const showNewColors = function() {
     // Update each element with a class pertaining to the particular color
     for (let i=0; i < 5; i++) {
 
-        let r = palette[i].rgb[0];
-        let g = palette[i].rgb[1];
-        let b = palette[i].rgb[2];
+        let colorBlockR = palette[i].rgb[0];
+        let colorBlockG = palette[i].rgb[1];
+        let colorBlockB = palette[i].rgb[2];
 
+        console.log(hslPalette.sorted)
+
+        let sortedR = hslPalette.sorted[i][0];
+        let sortedG = hslPalette.sorted[i][1];
+        let sortedB = hslPalette.sorted[i][2];
+
+        // color1 = background of div element
+        // color2 = unsplash background
+        // color3 = 
+        // color4 = 
+        // color5 = text color
         let updateClass = document.querySelectorAll(`.color${i+1}`);
         updateClass.forEach(function(element) {
-            if (i != 4) {
-                element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+            if (i != 4 && i!= 2) {
+                element.style.backgroundColor = `rgb(${sortedR}, ${sortedG}, ${sortedB}`;
+            } else if (i === 2) {
+                element.style.backgroundColor = `rgb(${sortedR}, ${sortedG}, ${sortedB}, 0.20)`;
+                console.log('check');
             } else {
-                element.style.color = `rgb(${r}, ${g}, ${b}`;
+                element.style.color = `rgb(${sortedR}, ${sortedG}, ${sortedB}`;
             }            
         });
 
         // Update SVG icons
         let svgIcon = document.getElementById(`color-block-${i+1}`);
-        svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
+        svgIcon.setAttribute('fill', `rgb(${colorBlockR}, ${colorBlockG}, ${colorBlockB})`)
 
         // Update rgb text input for the users
-        updateRgbInputs(r, g, b, i);
+        updateRgbInputs(colorBlockR, colorBlockG, colorBlockB, i);
     }
 
     return true;
@@ -272,7 +288,6 @@ const loadBackgrounds = function() {
                 backgroundImages.push(data.results[i]);
             }
           }
-          console.log(data);
 
           return updateBackground();
       })
@@ -286,6 +301,16 @@ const updateBackground = function() {
     let randomImage = backgroundImages[randomNum(0, backgroundImages.length - 1)]
     // Image URL from object
     let randomImageUrl = randomImage.urls.raw;
+
+    // Background overlay
+    let r = hslPalette.sorted[1][0];
+    let g = hslPalette.sorted[1][1];
+    let b = hslPalette.sorted[1][2];
+
+    // Below are tests to try to get a gradient overlay on the background image
+    //backgroundEl.style.background = `linear-gradient(rgba(${r}, ${g}, ${b}, .20), (${r}, ${g}, ${b}, .20)), url(${randomImageUrl}), center center`
+    //backgroundEl.style.background = `linear-gradient(rgba(${r}, ${g}, ${b}, .20), (${r}, ${g}, ${b}, .20))`
+    //backgroundEl.style.background = linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , var(--image-url) center center
     backgroundEl.style.backgroundImage = `url(${randomImageUrl})`;
     backgroundEl.style.backgroundRepeat = 'no-repeat';
     backgroundEl.style.backgroundSize = 'cover';
@@ -310,12 +335,29 @@ const checkBrightness = function(imageSrc) {
         console.log(`This image has a lightness of ${brightness} on a scale of 0 (darkest) to 255 (brightest)`);
 
         if (brightness < 130) {
-            darkMode = true;
-            console.log('This background image should probably have light text');
+            textColor(true);
+            console.log('This background image is dark');
         } else {
-            console.log('This background image should probably have dark text');
+            textColor(false);
+            console.log('This background image is light');
         }
     })
+}
+
+// Updates text color based on textLight being true or false. False = dark colored text, true = light colored text
+const textColor = function(textLight) {
+    let rgbTextEl = document.querySelectorAll('.displayRgb');
+    if (textLight) {
+        rgbTextEl.forEach(function(element) {
+            // Text should probably be updated to lightest color in palette
+            element.style.color = 'white';
+    })
+    } else {
+        rgbTextEl.forEach(function(element) {
+            // Text should probably be updated to a darker color in palette
+            element.style.color = 'black';
+        })
+    }
 }
 
 // Takes unsorted RGB colors from Colormind and sorts them from darkest to lightest into a new array
@@ -420,6 +462,7 @@ const getImageLightness = function(imageSrc,callback) {
 
 const generateHandler = function() {
     requestColorPalette();
+    showNewColors();
     updateBackground();
 }
 

@@ -10,111 +10,113 @@
     <title>Color Coded</title> 
 </head>
 <body class="background-img">
-    <div>
-        <header>
-            <div class="title-container">
-                <a href="#" class="pure-u title" style="text-decoration:none"><h1>Color Coded</h1></a>
+    <div id="color2">
+        <div>
+            <header>
+                <div class="title-container">
+                    <a href="#" class="pure-u title" style="text-decoration:none"><h1>Color Coded</h1></a>
+                </div>
+            </header>
+            <div id="CORS" class="invisible">
+                <p>Colormind does not support https.  Please use the link for access to CORS anywhere demo server.</p>
+                <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">https://cors-anywhere.herokuapp.com/corsdemo</a>
             </div>
-        </header>
-        <div id="CORS" class="invisible">
-            <p>Colormind does not support https.  Please use the link for access to CORS anywhere demo server.</p>
-            <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">https://cors-anywhere.herokuapp.com/corsdemo</a>
+            <div class="palette pure-g"> 
+                <div class="pure-u-1-5 block1">
+                    <div>
+                        <span id="colBlock1" class="color1 positionRelative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                                <g id="color-block-1" fill="#c81a15" stroke="#707070" stroke-width="1">
+                                <rect width="69" height="69" stroke="none"/>
+                                <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                                </g>
+                            </svg>
+                            <!-- Icon from https://svgapi.com/ -->
+                            <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="1" />
+                        </span>
+                        <p class="displayRgb">RGB: <input type="text" value="(200, 26, 21)" id="rgb1"></input>
+                        
+                        
+                    </div>
+                </div>
+                <div class="pure-u-1-5 block2">
+                    <div>
+                        <span id="colBlock2" class="color2 positionRelative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                                <g id="color-block-2" fill="#fef9e9" stroke="#707070" stroke-width="1">
+                                <rect width="69" height="69" stroke="none"/>
+                                <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                                </g>
+                            </svg>  
+                            <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="2" />
+                        </span>
+                        <p class="displayRgb">RGB: <input type="text" value="(254, 249, 233)" id="rgb2"></input>
+                    </div>
+                </div>
+                <div class="pure-u-1-5 block3">
+                    <div>
+                        <span id="colBlock3" class="color3 positionRelative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                                <g id="color-block-3" fill="#7dcccb" stroke="#707070" stroke-width="1">
+                                <rect width="69" height="69" stroke="none"/>
+                                <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                                </g>
+                            </svg>
+                            <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="3" />
+                        </span>
+                        <p class="displayRgb">RGB: <input type="text" value="(125, 204, 203)" id="rgb3"></input>
+                    </div>
+                </div>
+                <div class="pure-u-1-5 block4">
+                    <div>
+                        <span id="colBlock4" class="color4 positionRelative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                                <g id="color-block-4" fill="#4b9899" stroke="#707070" stroke-width="1">
+                                <rect width="69" height="69" stroke="none"/>
+                                <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                                </g>
+                            </svg>  
+                            <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="4" />                        
+                        </span>
+                        <p class="displayRgb">RGB: <input type="text" value="(75, 152, 153)" id="rgb4"></input>
+                    </div>
+                </div>
+                <div class="pure-u-1-5 block5">
+                    <div>
+                        <span id="colBlock5" class="color5 positionRelative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                                <g id="color-block-5" fill="#272f2a" stroke="#707070" stroke-width="1">
+                                <rect width="69" height="69" stroke="none"/>
+                                <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                                </g>
+                            </svg>          
+                            <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="5" />            
+                        </span>
+                        <p class="displayRgb">RGB: <input type="text" value="(39, 47, 42)" id="rgb5"></input>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="palette pure-g"> 
-            <div class="pure-u-1-5 block1">
-                <div>
-                    <span id="colBlock1" class="color1 positionRelative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
-                            <g id="color-block-1" fill="#c81a15" stroke="#707070" stroke-width="1">
-                              <rect width="69" height="69" stroke="none"/>
-                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
-                            </g>
-                        </svg>
-                        <!-- Icon from https://svgapi.com/ -->
-                        <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="1" />
-                    </span>
-                    <p class="displayRgb">RGB:<input type="text" value="(200, 26, 21)" id="rgb1"></input>
-                    
-                    
-                </div>
-            </div>
-            <div class="pure-u-1-5 block2">
-                <div>
-                    <span id="colBlock2" class="color2 positionRelative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
-                            <g id="color-block-2" fill="#fef9e9" stroke="#707070" stroke-width="1">
-                              <rect width="69" height="69" stroke="none"/>
-                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
-                            </g>
-                        </svg>  
-                        <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="2" />
-                    </span>
-                    <p class="displayRgb">RGB:<input type="text" value="(254, 249, 233)" id="rgb2"></input>
-                </div>
-            </div>
-            <div class="pure-u-1-5 block3">
-                <div>
-                    <span id="colBlock3" class="color3 positionRelative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
-                            <g id="color-block-3" fill="#7dcccb" stroke="#707070" stroke-width="1">
-                              <rect width="69" height="69" stroke="none"/>
-                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
-                            </g>
-                        </svg>
-                        <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="3" />
-                    </span>
-                    <p class="displayRgb">RGB:<input type="text" value="(125, 204, 203)" id="rgb3"></input>
-                </div>
-            </div>
-            <div class="pure-u-1-5 block4">
-                <div>
-                    <span id="colBlock4" class="color4 positionRelative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
-                            <g id="color-block-4" fill="#4b9899" stroke="#707070" stroke-width="1">
-                              <rect width="69" height="69" stroke="none"/>
-                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
-                            </g>
-                        </svg>  
-                        <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="4" />                        
-                    </span>
-                    <p class="displayRgb">RGB:<input type="text" value="(75, 152, 153)" id="rgb4"></input>
-                </div>
-            </div>
-            <div class="pure-u-1-5 block5">
-                <div>
-                    <span id="colBlock5" class="color5 positionRelative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
-                            <g id="color-block-5" fill="#272f2a" stroke="#707070" stroke-width="1">
-                              <rect width="69" height="69" stroke="none"/>
-                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
-                            </g>
-                        </svg>          
-                        <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="5" />            
-                    </span>
-                    <p class="displayRgb">RGB:<input type="text" value="(39, 47, 42)" id="rgb5"></input>
-                </div>
-            </div>
+        <div class="btn-container">
+            <button id="generate-colors" class="generateBtn">Generate</button>
+            <button class="saveBtn">Save</button>
         </div>
-    </div>
-    <div class="btn-container">
-        <button id="generate-colors" class="generateBtn">Generate</button>
-        <button class="saveBtn">Save</button>
-    </div>
-        <!-- <div class="textExample"></div>
-        <div class="savedPalettes"></div>
-        <div class="heroBG"></div> -->
-    <div id="savedPalettesPanel">
-        <h4>Saved Palettes</h4>
-        <div id="savedPalettes">
-            <!--
-            <div data-saved="0">
-                <span class="savedBlock" data-saved="0"> 1</span>
-                <span class="savedBlock" data-saved="0"> 2</span>
-                <span class="savedBlock" data-saved="0"> 3</span>
-                <span class="savedBlock" data-saved="0"> 4</span>
-                <span class="savedBlock" data-saved="0"> 5</span>
+            <!-- <div class="textExample"></div>
+            <div class="savedPalettes"></div>
+            <div class="heroBG"></div> -->
+        <div id="savedPalettesPanel">
+            <h4>Saved Palettes</h4>
+            <div id="savedPalettes">
+                <!--
+                <div data-saved="0">
+                    <span class="savedBlock" data-saved="0"> 1</span>
+                    <span class="savedBlock" data-saved="0"> 2</span>
+                    <span class="savedBlock" data-saved="0"> 3</span>
+                    <span class="savedBlock" data-saved="0"> 4</span>
+                    <span class="savedBlock" data-saved="0"> 5</span>
+                </div>
+                -->
             </div>
-            -->
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
