@@ -43,8 +43,8 @@ h1 {
     border: 10px solid #272f2a;
     border-radius: 20px;
     height: auto;
-    color: white;
-    font-family: Georgia, Times, "Times New Roman", serif;
+    color: #fef9e9;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .pure-g {
@@ -108,21 +108,20 @@ button:hover {
     right: -55px;
 }
 
-.displayHex {
+.displayRgb {
     text-align: center;
 }
 
-.displayHex input {
-    width: 80px;
-    text-align: center;
+.displayRgb input {
+    width: 120px;
 }
 
 #savedPalettesPanel {
-    width: 50%;
+    width: 15%;
     margin: auto;
     margin-top: 40px;
-    background-color: #272f2a;
-    color: white;
+    background-color: #7dcccb;
+    color: #fef9e9;
 }
 
 #savedPalettes, div {
@@ -169,11 +168,11 @@ button:hover {
 }
 
 .text-border {
-    border: 3px solid #272f2a;
+    border: 3px solid #4b9899;
     border-radius: 20px;
-    background-color: #272f2a;
+    background-color: #4b9899;
     padding: 15px;
-    width: 69%;
+    width: 30%;
     margin: auto;
     margin-top: 40px;
 }
@@ -185,23 +184,68 @@ button:hover {
 }
 
 .lzdog1 {
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.lzdog2 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
 }
 
 .lzdog3 {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
 }
 
 .lzdog4 {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.lzdog2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
 }
 
 .lzdog5 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: oblique;
+    font-variant: normal;
+    text-transform: none;
 }
 
 .savedpal {
@@ -211,7 +255,7 @@ button:hover {
 
 .saved-container {
     padding: 10px;
-    border: #272f2a;
+    border-color: #4b9899 !important;
     border-radius: 20px;
     width: 30%;
 }
