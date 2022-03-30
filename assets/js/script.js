@@ -1,12 +1,16 @@
 // TODO JAVASCRIPT BASIC FUNCTIONALITY:
-// Function to update elements on page to new colors, take RGB values from palette
-// Function to fetch request from Unsplash, returns a URL to a black and white background image
-// Function to update hero element on page after fetch from Unsplash (Unsplash requires we display the artists URL somewhere on the page)
-// Function to show user the locked status, calls from anonymous onclick function
-// Update anonymous onclick function to disable locking
+// (DONE?) Function to update elements on page to new colors, take RGB values from palette
+// How do we target the SVG files and update the colors for the above function?
+// What are the class names that are being targeted for each color specifically?
+// Function to fetch request from Unsplash on page load, returns data to a black and white background image
+// After fetch request from Unsplash, update a variable with fetch data so that when the user generates a new background it doesn't have to fetch every time (we have a limit on fetches)
+// Function to update hero element on page after user clicks generate (Unsplash requires we display the artists URL somewhere on the page btw)
+// What class or ID gets targeted to update the background? What color is the background receiving?
+// (DONE?) Update anonymous onclick function to disable locking
 // Function to update global array variable for saved design(s), executes on page load and after user clicks save design
 // Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
 // Function to update saved favorites on the sidebar, 
+// What class or ID specifically needs to be targeted on the DOM to update the sidebar?
 // TODO JAVASCRIPT EXTRA FUNCTIONALITY (NOT APART OF MVP):
 // Function to check background image for lightness (so that a predominantly dark backgrounds aren't selected) (potentially could use - https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script)
 // If background image is too dark for overlay color to appear, choose another picture
@@ -38,6 +42,7 @@ var palette = [
     }
 ];
 
+var savedPalettes = [];
 
 // Array will populate with HSL values, not RGB values
 // Colors are sorted darkest to lightest
@@ -46,43 +51,57 @@ let hslPalette = {
     sorted: [],
 };
 
-// Use for individual color manipulation
-var color= {
-    'rgb': [133, 42, 244],
-    'locked': false
+// Remove dom element from view but not the consumed space
+var hideContent = function (element) {
+    $(element).removeClass( "visible" ).addClass( "hidden" );
 };
 
-console.log(color.lock);
-/* 
-// Basic API call to colormind
-var url = "http://colormind.io/api/";
-var data = {
-	model : "default",
-	input : [[44,43,44],[90,83,82],"N","N","N"]
+var showContent = function (element) {
+    $(element).removeClass( "hidden" ).addClass( "visible" );
 };
 
-var http = new XMLHttpRequest();
-
-http.onreadystatechange = function() {
-	if(http.readyState == 4 && http.status == 200) {
-		var palette = JSON.parse(http.responseText).result;
-    console.log(palette);
-	}
+var updateLocalStorage = function () {
+    localStorage.setItem("palette", JSON.stringify(palette));
 };
 
-http.open("POST", url, true);
-http.send(JSON.stringify(data));
-*/
+var loadLocalStorage = function () {
+    //Get saved palettes from localStorage.
+    savedPalettes = localStorage.getItem("savedPalettes");
+  
+    if (savedPalettes === null) {
+        savedPalettes = [];
+    } else {  
+        //Converts eventTasks from the string format back into an array of objects.
+        savedPalettes = JSON.parse(savedPalettes);
+    }
+};
 
-// Sets locked to true
+// Function to show user the locked status, calls from anonymous onclick function
+var displayLockedStatus = function (locked, i) {
+   var selector = "[data-locked=" + i + "]";
+    var iconEL = $(selector);
+    if(locked) {
+        showContent(iconEL);
+    } else {
+        hideContent(iconEL);
+    }
+    
+};
+
+// Sets locked to true, if the color is not locked else unlocks and sets to false
 // Any function that updates colors will need to check if locked before updating the color
-$(".colorBlock").on("click", function() {
-    //search for position id
-    var position = this.getAttribute("data-color-id") - 1;
-    console.log(position);
+$(".palette").on("click", "span", function() {
+    //search for position id colBlock1
+    var id = this.getAttribute("id");
+    var i = id.length - 1;
+    var position = id[i] - 1;
 
-    palette[position].locked = true;
-    console.log(palette[position]);
+    if (palette[position].locked) {
+        palette[position].locked = false;
+    } else {
+        palette[position].locked = true;
+    }
+    displayLockedStatus(palette[position].locked, id[i]);
 });
 
 const requestColorPalette = function() {
@@ -140,10 +159,25 @@ const updatePalette = function(rgbColors) {
 // Displays colors ordered from darkest to lightest in color blocks
 const showNewColors = function() {
 
-    // Update each color block with a background color from our unsorted array
-    for (let i=0; i < palette.length; i++) {
-        let colorBlockEl = document.querySelector(`[data-color-id="${i+1}"]`)
-        colorBlockEl.style.backgroundColor = `hsl(${hslPalette.unsorted[i][0]}, ${hslPalette.unsorted[i][1]}%, ${hslPalette.unsorted[i][2]}%)`;
+    // Update each element with a class pertaining to the particular color
+    for (let i=0; i < 5; i++) {
+
+        let r = palette[i].rgb[0];
+        let g = palette[i].rgb[1];
+        let b = palette[i].rgb[2];
+
+        let updateClass = document.querySelectorAll(`.color${i+1}`);
+        updateClass.forEach(function(element) {
+            if (i != 4) {
+                element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+            } else {
+                element.style.color = `rgb(${r}, ${g}, ${b}`;
+            }            
+        });
+
+        // Update SVG icons
+        let svgIcon = document.getElementById(`color-block-${i+1}`);
+        svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
     }
 
     return true;

@@ -5,77 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href ="./assets/css/style.css">
     <title>Color Coded</title> 
 </head>
-<body  class="background-img">
+<body class="background-img">
     <div>
         <header>
             <div class="title-container">
                 <a href="#" class="pure-u title" style="text-decoration:none"><h1>Color Coded</h1></a>
             </div>
         </header>
-        <!-- <div class="palette"> 
-            <span id="colBlock1" class="color1">
-                <img src="./assets/images/color-block-1.svg">
-            </span>
-            <span id="colBlock2" class="color2">
-                <img src="./assets/images/color-block-2.svg">
-            </span>
-            <span id="colBlock3" class="color3">
-                <img src="./assets/images/color-block-3.svg">
-            </span>
-            <span id="colBlock4" class="color4">
-                <img src="./assets/images/color-block-4.svg">
-            </span>
-            <span id="colBlock5" class="color5">
-                <img src="./assets/images/color-block-5.svg">
-            </span>
-        </div> -->
         <div class="palette pure-g"> 
             <div class="pure-u-1-5 block1">
                 <div>
                     <span id="colBlock1" class="color1">
-                        <img src="./assets/images/color-block-1.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                            <g id="color-block-1" fill="#c81a15" stroke="#707070" stroke-width="1">
+                              <rect width="69" height="69" stroke="none"/>
+                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                            </g>
+                        </svg>
                     </span>
+                    <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="1" />
                 </div>
             </div>
             <div class="pure-u-1-5 block2">
                 <div>
                     <span id="colBlock2" class="color2">
-                        <img src="./assets/images/color-block-2.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                            <g id="color-block-2" fill="#fef9e9" stroke="#707070" stroke-width="1">
+                              <rect width="69" height="69" stroke="none"/>
+                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                            </g>
+                        </svg>  
                     </span>
+                    <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="2" />
                 </div>
             </div>
             <div class="pure-u-1-5 block3">
                 <div>
                     <span id="colBlock3" class="color3">
-                        <img src="./assets/images/color-block-3.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                            <g id="color-block-3" fill="#7dcccb" stroke="#707070" stroke-width="1">
+                              <rect width="69" height="69" stroke="none"/>
+                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                            </g>
+                        </svg>
                     </span>
+                    <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="3" />
                 </div>
             </div>
             <div class="pure-u-1-5 block4">
                 <div>
                     <span id="colBlock4" class="color4">
-                        <img src="./assets/images/color-block-4.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                            <g id="color-block-4" fill="#4b9899" stroke="#707070" stroke-width="1">
+                              <rect width="69" height="69" stroke="none"/>
+                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                            </g>
+                        </svg>                          
                     </span>
+                    <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="4" />
                 </div>
             </div>
             <div class="pure-u-1-5 block5">
                 <div>
                     <span id="colBlock5" class="color5">
-                        <img src="./assets/images/color-block-5.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69">
+                            <g id="color-block-5" fill="#272f2a" stroke="#707070" stroke-width="1">
+                              <rect width="69" height="69" stroke="none"/>
+                              <rect x="0.5" y="0.5" width="68" height="68" fill="none"/>
+                            </g>
+                        </svg>                      
                     </span>
+                    <img src="assets/images/lock-svgrepo-com.svg" alt="" class="svgLock hidden" data-locked="5" />
                 </div>
             </div>
         </div>
     </div>
     <div class="btn-container">
-        <button class="generateBtn">Generate</button>
+        <button id="generate-colors" class="generateBtn">Generate</button>
         <button class="saveBtn">Save</button>
     </div>
-    <div class="textExample">
-        <div class="text-border">
+    <div class="extemp-container">
+        <h3 class="extemp">Example Template:</h3>
+    </div>
+    <div class="text-border">
+        <div class="textExample">
             <p class="lzdog1">The quick brown fox jumps over the lazy dog</p>
             <p class="lzdog2">The quick brown fox jumps over the lazy dog</p>
             <p class="lzdog3">The quick brown fox jumps over the lazy dog</p>
@@ -83,13 +100,18 @@
             <p class="lzdog5">The quick brown fox jumps over the lazy dog</p>
         </div>
     </div>
+    <div class="savedlist">
+        <h4>Saved List</h4>
+            
+        <ul id="savedlist">
 
-    <div>
-
-    </div>
-
+        </ul>
+        </div>
     <footer>
         
     </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html> 
