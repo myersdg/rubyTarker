@@ -304,11 +304,50 @@ const checkBrightness = function(imageSrc) {
         if (brightness < 130) {
             darkMode = true;
             console.log('This background image should probably have light text');
+            changeText(false);
         } else {
             console.log('This background image should probably have dark text');
+            changeText(true);
         }
     })
 }
+
+const changeText = function(isDark) {
+    let hexTextEls = document.querySelectorAll('.displayHex');
+    hexTextEls.forEach(function(element) {
+        if (isDark) {
+            element.style.color = 'black';
+        } else {
+            element.style.color = 'white';
+        }
+    })
+}
+
+const updateHexTextEls = function() {
+
+    for (let i=0; i < 5; i++) {
+        let r = parseInt(palette[i].rgb[0]);
+        let g = parseInt(palette[i].rgb[1]);
+        let b = parseInt(palette[i].rgb[2]);
+
+        console.log(r, g, b)
+
+        let inputEl = document.getElementById(`hex${i+1}`);
+        let hex = ConvertRGBtoHex(r, g, b);
+        inputEl.value = hex;
+    }
+}
+
+// Below two functions from https://www.delftstack.com/howto/javascript/rgb-to-hex-javascript/
+function ColorToHex(color) {
+    var hexadecimal = color.toString(16);
+    return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+}
+
+function ConvertRGBtoHex(red, green, blue) {
+    return "#" + ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
+}
+
 
 // Takes unsorted RGB colors from Colormind and sorts them from darkest to lightest into a new array
 const sortColors = function(rgbColors) {
@@ -413,6 +452,7 @@ const getImageLightness = function(imageSrc,callback) {
 const generateHandler = function() {
     requestColorPalette();
     updateBackground();
+    updateHexTextEls();
 }
 
 buttonEl.addEventListener('click', generateHandler);
