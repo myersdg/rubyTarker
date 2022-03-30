@@ -103,6 +103,17 @@ button:hover {
     border: 2px solid black;
     padding: 5px;
     background-color: white;
+    position: absolute;
+    top: -40px;
+    right: -55px;
+}
+
+.displayRgb {
+    text-align: center;
+}
+
+.displayRgb input {
+    width: 120px;
 }
 
 #savedPalettesPanel {
@@ -196,4 +207,7 @@ button:hover {
     border-radius: 20px;
     background-color: #272f2a;
     width: 80%;
+}
+.positionRelative {
+    position: relative;
 }
