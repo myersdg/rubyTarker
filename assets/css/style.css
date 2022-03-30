@@ -104,6 +104,22 @@ button:focus {
     background-color: white;
 }
 
+#savedPalettesPanel {
+    max-width: 25%;
+    margin: 10px;
+    background-color: black;
+    color: white;
+}
+
+/*testing style*/
+
+.savedBlock {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border: 2px white solid; 
+}
+
 /*Utility classes*/
 .visible {
     display: inline-block;
@@ -114,15 +130,61 @@ button:focus {
     display: hidden;
 }
 
+.invisible {
+    display: none;
+}
+
 .extemp-container {
-    margin-top: 40px;
-    border: #272f2a;
+    margin: 70px 0px 0px 110px;
+    border: 3px #272f2a solid;
+    border-radius: 20px;
+    background-color: #272f2a;
+    padding: 10px;
+    width: 55%;
+}
+
+.extemp {
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
 }
 
 .text-border {
-    border: solid;
+    border: 3px solid #7dcccb;
     border-radius: 20px;
-    background-color: #4b9899;
-    margin: 10px 30px
+    background-color: #7dcccb;
+    padding: 15px;
+    width: 90%;
+    margin: 10px 0px 0px 25px;
 }
 
+.textExample, p {
+    color: white;
+    text-align: center;
+    font-size: large;
+}
+
+.lzdog1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.lzdog2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.lzdog3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.lzdog4 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.lzdog5 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.savedpal {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
