@@ -246,9 +246,17 @@ const showNewColors = function() {
         // Update SVG icons
         let svgIcon = document.getElementById(`color-block-${i+1}`);
         svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
+
+        // Update rgb text input for the users
+        updateRgbInputs(r, g, b, i);
     }
 
     return true;
+}
+
+const updateRgbInputs = function(r, g, b, idIndex) {
+    let rgbEl = document.getElementById(`rgb${idIndex+1}`)
+    rgbEl.value = `(${r}, ${g}, ${b})`;
 }
 
 // Fetches around 28 background images from Unsplash and loads them into backgroundImages array

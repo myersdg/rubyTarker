@@ -110,6 +110,7 @@ button:focus {
 
 .displayRgb input {
     width: 120px;
+    text-align: center;
 }
 
 #savedPalettesPanel {
