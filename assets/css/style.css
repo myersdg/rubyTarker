@@ -99,6 +99,17 @@ button:focus {
     border: 2px solid black;
     padding: 5px;
     background-color: white;
+    position: absolute;
+    top: -40px;
+    right: -55px;
+}
+
+.displayRgb {
+    text-align: center;
+}
+
+.displayRgb input {
+    width: 120px;
 }
 
 #savedPalettesPanel {
@@ -129,4 +140,8 @@ button:focus {
 
 .invisible {
     display: none;
+}
+
+.positionRelative {
+    position: relative;
 }
