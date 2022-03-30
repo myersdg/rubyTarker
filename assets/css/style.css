@@ -117,10 +117,15 @@ button:hover {
 }
 
 #savedPalettesPanel {
-    max-width: 25%;
-    margin: 10px;
-    background-color: black;
+    width: 50%;
+    margin: auto;
+    margin-top: 40px;
+    background-color: #272f2a;
     color: white;
+}
+
+#savedPalettes, div {
+    text-align: center;
 }
 
 /*testing style*/
@@ -147,7 +152,8 @@ button:hover {
 }
 
 .extemp-container {
-    margin: 70px 0px 0px 110px;
+    margin: auto;
+    margin-top: 60px;
     border: 3px #272f2a solid;
     border-radius: 20px;
     background-color: #272f2a;
@@ -166,8 +172,9 @@ button:hover {
     border-radius: 20px;
     background-color: #272f2a;
     padding: 15px;
-    width: 90%;
-    margin: 10px 0px 0px 25px;
+    width: 69%;
+    margin: auto;
+    margin-top: 40px;
 }
 
 .textExample, p {
@@ -198,16 +205,16 @@ button:hover {
 
 .savedpal {
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
 .saved-container {
     padding: 10px;
     border: #272f2a;
     border-radius: 20px;
-    background-color: #272f2a;
-    width: 80%;
+    width: 30%;
 }
+
 .positionRelative {
     position: relative;
 }
