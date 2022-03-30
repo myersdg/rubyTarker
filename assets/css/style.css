@@ -108,12 +108,13 @@ button:hover {
     right: -55px;
 }
 
-.displayRgb {
+.displayHex {
     text-align: center;
 }
 
-.displayRgb input {
-    width: 120px;
+.displayHex input {
+    width: 80px;
+    text-align: center;
 }
 
 #savedPalettesPanel {
