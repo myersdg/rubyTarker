@@ -48,7 +48,10 @@ var palette = [
         'locked': false
     },
     {
-        'hero': undefined
+        'hero': undefined,
+    },
+    {
+        'sortedHsl': [[143, 9, 17], [2, 81, 43], [181, 34, 45], [179, 44, 65], [46, 91, 95]]
     }
 ];
 
@@ -133,6 +136,8 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
+
+        console.log(savedPal)
 
         const heroThumbnailEl = $('<span>')
         .addClass('savedBlock')
@@ -248,6 +253,9 @@ const updatePalette = function(rgbColors) {
     let hslColorsSorted = sortColors(rgbColors);
     hslPalette.sorted = hslColorsSorted;
 
+    // Update palette with sorted HSL array
+    palette[6].sortedHsl = hslColorsSorted;
+
     // Update unsorted HSL array
     for (let i=0; i < 5; i++) {
         hslColor = rgbToHsl(rgbColors[i][0], rgbColors[i][1], rgbColors[i][2])
@@ -258,7 +266,7 @@ const updatePalette = function(rgbColors) {
 }
 
 // Displays colors ordered from darkest to lightest in color blocks
-const showNewColors = function() {
+const showNewColors = function(fromSaved) {
 
     // Update each element with a class pertaining to the particular color
     for (let i=0; i < 5; i++) {
@@ -281,7 +289,7 @@ const showNewColors = function() {
         svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
     }
 
-    return updateBackground();
+    return updateBackground(fromSaved);
 }
 
 // Fetches around 28 background images from Unsplash and loads them into backgroundImages array
@@ -305,18 +313,36 @@ const loadBackgrounds = function() {
 }
 
 // Update background from our backgroundImages array (preloaded upon opening of page by user)
-const updateBackground = function() {
-    let backgroundEl = document.querySelector('.background-img');
-    // Image object is selected
-    let randomImage = backgroundImages[randomNum(0, backgroundImages.length - 1)]
-    // Image URL from object
-    let randomImageUrl = randomImage.urls.raw;
+const updateBackground = function(fromSaved) {
 
-    // Background color is second to lightest color
-    let color = HSLToRGB(hslPalette.sorted[3][0], hslPalette.sorted[3][1], hslPalette.sorted[3][2]);
+    let backgroundEl = document.querySelector('.background-img');
+    let imageUrl;
+    let color;
+    let randomImage;
+
+    // Background is being loaded from a saved palette
+    if (fromSaved) {
+        imageUrl = palette[5].hero.urls.raw;
+
+        // Colors are taken from sorted HSL palette and then converted to RGB
+        color = HSLToRGB(palette[6].sortedHsl[3][0], palette[6].sortedHsl[3][1], palette[6].sortedHsl[3][2])
+    } 
+    // Background is being generated randomly
+    else {
+        // Image object is selected
+        randomImage = backgroundImages[randomNum(0, backgroundImages.length - 1)]
+        // Image URL from object
+        imageUrl = randomImage.urls.raw;
+
+        // Background color is second to lightest color
+        color = HSLToRGB(hslPalette.sorted[3][0], hslPalette.sorted[3][1], hslPalette.sorted[3][2]);
+
+        // Update palette with hero
+        palette[5].hero = randomImage;
+    }
 
     // To overlay color onto background, linear-gradient is needed
-    backgroundEl.style.background = `linear-gradient(rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50), rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50)), url(${randomImageUrl}) center center`;
+    backgroundEl.style.background = `linear-gradient(rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50), rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50)), url(${imageUrl}) center center`;
     backgroundEl.style.backgroundSize = 'cover';
 
     /* LEAVE CODE HERE - WILL UNCOMMENT WHEN WE HAVE FOOTER STYLING
@@ -329,10 +355,7 @@ const updateBackground = function() {
     el.classList.add('ADD', 'CLASSES', 'HERE')
     */
 
-    // Update hero object into palette
-    palette[5].hero = randomImage;
-
-    return checkBrightness(randomImageUrl);
+    return checkBrightness(imageUrl);
 }
 
 // Checks if background image needs light or dark text
@@ -526,7 +549,7 @@ $("#savedPalettes").on("click", "span", function() {
     //reload saved palette
     var index = this.getAttribute("data-saved");
     palette = savedPalettes[index];
-    showNewColors();
+    showNewColors(true);
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
