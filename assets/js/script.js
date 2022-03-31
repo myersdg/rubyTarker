@@ -56,7 +56,7 @@ var savedPalettes = [];
 // Colors are sorted darkest to lightest
 let hslPalette = {
     unsorted: [],
-    sorted: [],
+    sorted: [[143, 9, 17], [2, 81, 43], [181, 34, 45], [179, 44, 65], [46, 91, 95]]
 };
 
 // Remove dom element from view but not the consumed space
@@ -271,7 +271,7 @@ const showNewColors = function() {
         svgIcon.setAttribute('fill', `rgb(${r}, ${g}, ${b})`)
     }
 
-    return true;
+    return updateBackground();
 }
 
 // Fetches around 28 background images from Unsplash and loads them into backgroundImages array
@@ -301,10 +301,13 @@ const updateBackground = function() {
     let randomImage = backgroundImages[randomNum(0, backgroundImages.length - 1)]
     // Image URL from object
     let randomImageUrl = randomImage.urls.raw;
-    backgroundEl.style.backgroundImage = `url(${randomImageUrl})`;
-    backgroundEl.style.backgroundRepeat = 'no-repeat';
+
+    // Background color is second to lightest color
+    let color = HSLToRGB(hslPalette.sorted[3][0], hslPalette.sorted[3][1], hslPalette.sorted[3][2]);
+
+    // To overlay color onto background, linear-gradient is needed
+    backgroundEl.style.background = `linear-gradient(rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50), rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50)), url(${randomImageUrl}) center center`;
     backgroundEl.style.backgroundSize = 'cover';
-    backgroundEl.style.backgroundPosition = 'center center';
 
     /* LEAVE CODE HERE - WILL UNCOMMENT WHEN WE HAVE FOOTER STYLING
     // Attribute artist of background in footer
@@ -433,6 +436,18 @@ const rgbToHsl = function(r, g, b) {
     ];
 };
 
+// Code from https://www.30secondsofcode.org/js/s/hsl-to-rgb
+// Takes integers and returns integers
+const HSLToRGB = (h, s, l) => {
+    s /= 100;
+    l /= 100;
+    const k = n => (n + h / 30) % 12;
+    const a = s * Math.min(l, 1 - l);
+    const f = n =>
+      l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    return [255 * f(0), 255 * f(8), 255 * f(4)];
+  };
+
 // Function from https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script
 // Returns brightness in the callback function given an image source and a callback function
 const getImageLightness = function(imageSrc,callback) {
@@ -474,7 +489,6 @@ const getImageLightness = function(imageSrc,callback) {
 
 const generateHandler = function() {
     requestColorPalette();
-    updateBackground();
     updateHexTextEls();
 }
 
