@@ -23,6 +23,7 @@ let backgroundImages = [];
 let darkMode = false;
 let errorFlag = true;
 
+
 // Colormind returns an array of 5 rgb colors as an array of 3 element arrays.
 //  We can store as an array objects with rgb color and lock status
 var palette = [
@@ -48,6 +49,7 @@ var palette = [
     }
 ];
 
+var paletteID = 1;
 var savedPalettes = [];
 
 // Array will populate with HSL values, not RGB values
@@ -89,6 +91,16 @@ var loadLocalStorage = function () {
     }
 };
 
+// Delete palette for saved palettes
+var deleteSavedPalette = function (element) {
+    // Use the data-saved value to for the array of palettes index
+    // Create a tempArray and write all but the deleted palette from the array
+    // copy tempArray to savedPalettes
+    // Update local storage
+    // Delete palette element from saved palette
+
+};
+
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
 var showSavedPalettes = function (updated) {
@@ -118,6 +130,17 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
+
+        var deleteBtnEl = $("<button>")
+        .addClass("deletePaletteBtn")
+        .attr("data-saved", i);
+        var imgEl = $("<img>")
+        .addClass("svgTrash")
+        .attr("src", "assets/images/trash-svgrepo-com.svg")
+        .attr("alt", "");
+
+        $(imgEl).appendTo($(deleteBtnEl));
+        $(deleteBtnEl).appendTo($(savedPaletteEL));
     }
 };
 
