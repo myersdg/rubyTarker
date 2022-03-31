@@ -46,6 +46,9 @@ var palette = [
     {
         'rgb': [226,209,167],
         'locked': false
+    },
+    {
+        'hero': undefined
     }
 ];
 
@@ -119,7 +122,7 @@ var showSavedPalettes = function (updated) {
         var savedPal = savedPalettes[i];
 
         $(savedPaletteEL).appendTo($("#savedPalettes"));
-        for (var k= 0; k < savedPal.length; k++) {
+        for (var k= 0; k < 5; k++) {
             
             var tempBlock = savedPal[k];
             var savedBlockEl = $("<span>")
@@ -130,6 +133,13 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
+
+        const heroThumbnailEl = $('<span>')
+        .addClass('savedBlock')
+        .attr('data-saved', i)
+        .css('backgroundImage', `url(${savedPal[5].hero.urls.small_s3})`)
+
+        $(heroThumbnailEl).appendTo($(savedPaletteEL));
 
         var deleteBtnEl = $("<button>")
         .addClass("deletePaletteBtn")
@@ -318,6 +328,9 @@ const updateBackground = function() {
     // Update all classes below separated by commas
     el.classList.add('ADD', 'CLASSES', 'HERE')
     */
+
+    // Update hero object into palette
+    palette[5].hero = randomImage;
 
     return checkBrightness(randomImageUrl);
 }
