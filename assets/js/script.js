@@ -28,23 +28,23 @@ let errorFlag = true;
 //  We can store as an array objects with rgb color and lock status
 var palette = [
     {
-        'rgb': [133, 42, 244],
+        'rgb': [200, 26, 21],
         'locked': false
     },
     {
-        'rgb': [33, 22, 44],
+        'rgb': [254, 249, 233],
         'locked': false
     },
     {
-        'rgb': [13, 52, 24],
+        'rgb': [125, 204, 203],
         'locked': false
     },
     {
-        'rgb': [20, 60, 48],
+        'rgb': [75, 152, 153],
         'locked': false
     },
     {
-        'rgb': [226,209,167],
+        'rgb': [39, 47, 42],
         'locked': false
     },
     {
@@ -136,8 +136,6 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
-
-        console.log(savedPal)
 
         const heroThumbnailEl = $('<span>')
         .addClass('savedBlock')
@@ -231,7 +229,6 @@ const requestColorPalette = function() {
             if (errorFlag) {
                 showContent($("#CORS"));
             } 
-            console.log(`Click me - https://cors-anywhere.herokuapp.com/corsdemo`)
         }
     }
 
@@ -241,7 +238,7 @@ const requestColorPalette = function() {
 
 // Updates palette object with new rgb values
 const updatePalette = function(rgbColors) {
-    for (let i=0; i < palette.length; i++) {
+    for (let i=0; i < 5; i++) {
         palette[i].rgb = rgbColors[i];
     }
 
@@ -261,6 +258,8 @@ const updatePalette = function(rgbColors) {
         hslColor = rgbToHsl(rgbColors[i][0], rgbColors[i][1], rgbColors[i][2])
         hslPalette.unsorted.push(hslColor);
     }
+
+    updateHexTextEls();
 
     return showNewColors();
 }
@@ -305,7 +304,6 @@ const loadBackgrounds = function() {
                 backgroundImages.push(data.results[i]);
             }
           }
-          console.log(data);
 
           return updateBackground();
       })
@@ -361,14 +359,14 @@ const updateBackground = function(fromSaved) {
 // Checks if background image needs light or dark text
 const checkBrightness = function(imageSrc) {
     getImageLightness(imageSrc, function(brightness) {
-        console.log(`This image has a lightness of ${brightness} on a scale of 0 (darkest) to 255 (brightest)`);
 
+        // Light text
         if (brightness < 130) {
             darkMode = true;
-            console.log('This background image should probably have light text');
             changeText(false);
-        } else {
-            console.log('This background image should probably have dark text');
+        } 
+        // Dark text
+        else {
             changeText(true);
         }
     })
@@ -391,8 +389,6 @@ const updateHexTextEls = function() {
         let r = parseInt(palette[i].rgb[0]);
         let g = parseInt(palette[i].rgb[1]);
         let b = parseInt(palette[i].rgb[2]);
-
-        console.log(r, g, b)
 
         let inputEl = document.getElementById(`hex${i+1}`);
         let hex = ConvertRGBtoHex(r, g, b);
@@ -524,8 +520,8 @@ const getImageLightness = function(imageSrc,callback) {
 }
 
 const generateHandler = function() {
+
     requestColorPalette();
-    updateHexTextEls();
 }
 
 buttonEl.addEventListener('click', generateHandler);
@@ -536,6 +532,7 @@ showSavedPalettes(false);
 
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
+    // Pushing palette to savedPalettes makes savedPalettes update when palette updates (arrays are references)
     savedPalettes.push(palette);
     showSavedPalettes(true);
     updateLocalStorage();
