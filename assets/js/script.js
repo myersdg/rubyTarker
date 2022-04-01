@@ -540,8 +540,9 @@ showSavedPalettes(false);
 
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
-    // Pushing palette to savedPalettes makes savedPalettes update when palette updates (arrays are references)
-    savedPalettes.push(palette);
+    // Deep copy made so that arrays don't point at same place in memory (so that when palette is updated savedPalettes isn't updated as well)
+    let paletteDeepCopy = JSON.parse(JSON.stringify(palette));
+    savedPalettes.push(paletteDeepCopy);
     showSavedPalettes(true);
     updateLocalStorage();
     if (!errorFlag) {
@@ -553,7 +554,9 @@ $(".saveBtn").on("click", function() {
 $("#savedPalettes").on("click", "span", function() {
     //reload saved palette
     var index = this.getAttribute("data-saved");
-    palette = savedPalettes[index];
+    // Deep copy made so that arrays don't point at same place in memory (so that when savedPalettes is updated palette isn't updated as well)
+    let savedPaletteDeepCopy = JSON.parse(JSON.stringify(savedPalettes));
+    palette = savedPaletteDeepCopy[index];
     showNewColors(true);
     if (!errorFlag) {
         hideElement($("#CORS"));
