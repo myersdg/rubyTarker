@@ -1,5 +1,16 @@
 {
     "cSpell.words": [
-        "Colormind"
-    ]
+        "Colormind",
+        "extemp",
+        "lzdog",
+        "savedpal"
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:rubyTarker}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }

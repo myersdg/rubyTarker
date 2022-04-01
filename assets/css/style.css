@@ -121,6 +121,7 @@ button:hover {
     width: 300px;
     margin: auto;
     margin-top: 40px;
+    margin-bottom: 10px;
     background-color: #7dcccb;
     color: #fef9e9;
 }

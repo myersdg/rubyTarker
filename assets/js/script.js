@@ -80,6 +80,14 @@ var showContent = function (element) {
     $(element).removeClass( "hidden invisible" ).addClass( "visible" );
 };
 
+//Remove the Dom element with the matching selector
+var removeElement = function (selector) {
+    var element = document.querySelector(selector);
+    if(element){
+        element.remove();
+    }
+};
+
 // Array of P
 var updateLocalStorage = function () {
     localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
@@ -136,14 +144,14 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
-
+        /*
         const heroThumbnailEl = $('<span>')
         .addClass('savedBlock')
         .attr('data-saved', i)
         .css('backgroundImage', `url(${savedPal[5].hero.urls.small_s3})`)
 
         $(heroThumbnailEl).appendTo($(savedPaletteEL));
-
+        */
         var deleteBtnEl = $("<button>")
         .addClass("deletePaletteBtn")
         .attr("data-saved", i);
@@ -547,6 +555,32 @@ $("#savedPalettes").on("click", "span", function() {
     var index = this.getAttribute("data-saved");
     palette = savedPalettes[index];
     showNewColors(true);
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    } 
+});
+
+// Delete button for a saved palette was clicked
+$("#savedPalettes").on("click", "button", function() {
+    //Delete saved palette
+    console.log(this);
+    var index = this.getAttribute("data-saved");
+    console.log("index", index);
+    
+    let selector = "div[data-saved=" + index + "]";
+    $(selector).remove();
+
+    console.log("savedPalettes.length", savedPalettes.length);
+    let tempArray = [];
+    for(let i = 0; i < savedPalettes.length; i++){
+        if(i != index) {
+            tempArray.push(savedPalettes[i]);
+        }
+    }
+
+    savedPalettes = tempArray
+    updateLocalStorage();
+    console.log("savedPalettes.length", savedPalettes.length);
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
