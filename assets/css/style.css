@@ -141,6 +141,7 @@ button:hover {
 .svgTrash {
     width: 90%;
     height: 90%;
+    margin-bottom: 5px;
 }
 
 /*Utility classes*/
