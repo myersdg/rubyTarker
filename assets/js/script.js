@@ -127,10 +127,17 @@ var showSavedPalettes = function (updated) {
 
     // Update each color block with a background color from our sorted array
     for (i; i < savedPalettes.length; i++) {
-        var savedPaletteEL = $("<div>")
-        .attr("data-saved", i);
- 
         var savedPal = savedPalettes[i];
+        const heroColorHSL = savedPal[6].sortedHsl[3]
+        const heroColorRgb = HSLToRGB(heroColorHSL[0], heroColorHSL[1], heroColorHSL[2])
+
+        var savedPaletteEL = $("<div>")
+        .attr("data-saved", i)
+        // Background is hero image with color overlay
+        .css('background', `linear-gradient(rgba(${heroColorRgb[0]}, ${heroColorRgb[1]}, ${heroColorRgb[2]}, 0.50), rgba(${heroColorRgb[0]}, ${heroColorRgb[1]}, ${heroColorRgb[2]}, 0.50)), url(${savedPal[5].hero.urls.thumb}) center center`)
+        .css('backgroundSize', 'cover')
+        // Class for further styling
+        .addClass('savedPaletteContainer')
 
         $(savedPaletteEL).appendTo($("#savedPalettes"));
         for (var k= 0; k < 5; k++) {
@@ -144,14 +151,7 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
-        /*
-        const heroThumbnailEl = $('<span>')
-        .addClass('savedBlock')
-        .attr('data-saved', i)
-        .css('backgroundImage', `url(${savedPal[5].hero.urls.small_s3})`)
 
-        $(heroThumbnailEl).appendTo($(savedPaletteEL));
-        */
         var deleteBtnEl = $("<button>")
         .addClass("deletePaletteBtn")
         .attr("data-saved", i);

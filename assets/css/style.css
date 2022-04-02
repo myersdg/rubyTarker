@@ -130,13 +130,19 @@ button:hover {
     text-align: center;
 }
 
+.savedPaletteContainer {
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
 /*testing style*/
 
 .savedBlock, .deletePaletteBtn  {
     display: inline-block;
     width: 35px;
     height: 35px;
-    border: 2px white solid; 
+    border: 1px black solid; 
 }
 .svgTrash {
     width: 90%;
