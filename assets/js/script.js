@@ -76,11 +76,12 @@ var removeElement = function (selector) {
     }
 };
 
-// Array of P
+// Save Array of Palettes to local storage
 var updateLocalStorage = function () {
     localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
 };
 
+// Load saved content from local storage back to the app
 var loadLocalStorage = function () {
     //Get saved palettes from localStorage.
     savedPalettes = localStorage.getItem("savedPalettes");
@@ -91,16 +92,6 @@ var loadLocalStorage = function () {
         //Converts eventTasks from the string format back into an array of objects.
         savedPalettes = JSON.parse(savedPalettes);
     }
-};
-
-// Delete palette for saved palettes
-var deleteSavedPalette = function (element) {
-    // Use the data-saved value to for the array of palettes index
-    // Create a tempArray and write all but the deleted palette from the array
-    // copy tempArray to savedPalettes
-    // Update local storage
-    // Delete palette element from saved palette
-
 };
 
 // Display saved palettes
@@ -190,6 +181,7 @@ const randomNum = function(min, max) {
     return num;
   }
 
+// Request a new color palette from Colormind API 
 const requestColorPalette = function() {
     
     // CORS anywhere helps GitHub Pages accept http fetch requests
@@ -368,6 +360,7 @@ const checkBrightness = function(imageSrc) {
     })
 }
 
+// Change text color based on dark mode status
 const changeText = function(isDark) {
     let hexTextEls = document.querySelectorAll('.displayHex');
     hexTextEls.forEach(function(element) {
@@ -379,6 +372,7 @@ const changeText = function(isDark) {
     })
 }
 
+// Display HEX value for colors in current palette
 const updateHexTextEls = function() {
 
     for (let i=0; i < 5; i++) {
@@ -398,10 +392,10 @@ function ColorToHex(color) {
     return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
 }
 
+// Convert RGB color values to Hex
 function ConvertRGBtoHex(red, green, blue) {
     return "#" + ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
 }
-
 
 // Takes unsorted RGB colors from Colormind and sorts them from darkest to lightest into a new array
 const sortColors = function(rgbColors) {
@@ -515,17 +509,20 @@ const getImageLightness = function(imageSrc,callback) {
     }
 }
 
+// Handler for generate palettes button
 const generateHandler = function() {
 
     requestColorPalette();
 }
 
+// Event listener for the generate button
 buttonEl.addEventListener('click', generateHandler);
 
 loadBackgrounds();
 loadLocalStorage();
 showSavedPalettes(false);
 
+// Event listener for palette save button
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
     // Deep copy made so that arrays don't point at same place in memory (so that when palette is updated savedPalettes isn't updated as well)
@@ -538,7 +535,7 @@ $(".saveBtn").on("click", function() {
     } 
 });
 
-// Previously saved palette was clicked
+// Event listener for pPreviously saved palettes when clicked
 $("#savedPalettes").on("click", "span", function() {
     //reload saved palette
     var index = this.getAttribute("data-saved");
@@ -551,7 +548,7 @@ $("#savedPalettes").on("click", "span", function() {
     } 
 });
 
-// Delete button for a saved palette was clicked
+// Event listener for delete button for a saved palette was clicked
 $("#savedPalettes").on("click", "button", function() {
     //Delete saved palette
     console.log(this);
