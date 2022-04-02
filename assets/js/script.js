@@ -1,19 +1,7 @@
 // TODO JAVASCRIPT BASIC FUNCTIONALITY:
-// (DONE?) Function to update elements on page to new colors, take RGB values from palette
-// (DONE?) How do we target the SVG files and update the colors for the above function?
-// (DONE?) What are the class names that are being targeted for each color specifically?
-// (DONE?) Function to fetch request from Unsplash on page load, returns data to a black and white background image
-// (DONE?) After fetch request from Unsplash, update a variable with fetch data so that when the user generates a new background it doesn't have to fetch every time (we have a limit on fetches)
-// (DONE?)Function to display background image credit when updating background
+// Function to display background image credit when updating background
 // Function to allow user to lock background image
-// Need to know what element to update with artist credit words
-// What color is the background receiving?
-// (DONE?) Update anonymous onclick function to disable locking
-// Function to update global array variable for saved design(s), executes on page load and after user clicks save design
-// Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
-   // Done:  palette saved to local storage
-// (Done) Function to update saved favorites on the sidebar, 
-// (Done) What class or ID specifically needs to be targeted on the DOM to update the sidebar?
+// Naming saved palettes
 // TODO JAVASCRIPT EXTRA FUNCTIONALITY (NOT APART OF MVP):
 // (DONE?) Function to check background image for lightness (so that a predominantly dark backgrounds aren't selected) (potentially could use - https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script)
 // If background image is too dark for dark text, change to light text
@@ -88,11 +76,12 @@ var removeElement = function (selector) {
     }
 };
 
-// Array of P
+// Save Array of Palettes to local storage
 var updateLocalStorage = function () {
     localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
 };
 
+// Load saved content from local storage back to the app
 var loadLocalStorage = function () {
     //Get saved palettes from localStorage.
     savedPalettes = localStorage.getItem("savedPalettes");
@@ -103,16 +92,6 @@ var loadLocalStorage = function () {
         //Converts eventTasks from the string format back into an array of objects.
         savedPalettes = JSON.parse(savedPalettes);
     }
-};
-
-// Delete palette for saved palettes
-var deleteSavedPalette = function (element) {
-    // Use the data-saved value to for the array of palettes index
-    // Create a tempArray and write all but the deleted palette from the array
-    // copy tempArray to savedPalettes
-    // Update local storage
-    // Delete palette element from saved palette
-
 };
 
 // Display saved palettes
@@ -127,10 +106,17 @@ var showSavedPalettes = function (updated) {
 
     // Update each color block with a background color from our sorted array
     for (i; i < savedPalettes.length; i++) {
-        var savedPaletteEL = $("<div>")
-        .attr("data-saved", i);
- 
         var savedPal = savedPalettes[i];
+        const heroColorHSL = savedPal[6].sortedHsl[3]
+        const heroColorRgb = HSLToRGB(heroColorHSL[0], heroColorHSL[1], heroColorHSL[2])
+
+        var savedPaletteEL = $("<div>")
+        .attr("data-saved", i)
+        // Background is hero image with color overlay
+        .css('background', `linear-gradient(rgba(${heroColorRgb[0]}, ${heroColorRgb[1]}, ${heroColorRgb[2]}, 0.50), rgba(${heroColorRgb[0]}, ${heroColorRgb[1]}, ${heroColorRgb[2]}, 0.50)), url(${savedPal[5].hero.urls.thumb}) center center`)
+        .css('backgroundSize', 'cover')
+        // Class for further styling
+        .addClass('savedPaletteContainer')
 
         $(savedPaletteEL).appendTo($("#savedPalettes"));
         for (var k= 0; k < 5; k++) {
@@ -144,14 +130,7 @@ var showSavedPalettes = function (updated) {
            $(savedBlockEl).css("backgroundColor", color);
            $(savedBlockEl).appendTo($(savedPaletteEL));
         }
-        /*
-        const heroThumbnailEl = $('<span>')
-        .addClass('savedBlock')
-        .attr('data-saved', i)
-        .css('backgroundImage', `url(${savedPal[5].hero.urls.small_s3})`)
 
-        $(heroThumbnailEl).appendTo($(savedPaletteEL));
-        */
         var deleteBtnEl = $("<button>")
         .addClass("deletePaletteBtn")
         .attr("data-saved", i);
@@ -202,6 +181,7 @@ const randomNum = function(min, max) {
     return num;
   }
 
+// Request a new color palette from Colormind API 
 const requestColorPalette = function() {
     
     // CORS anywhere helps GitHub Pages accept http fetch requests
@@ -282,14 +262,23 @@ const showNewColors = function(fromSaved) {
         let g = palette[i].rgb[1];
         let b = palette[i].rgb[2];
 
+        let h = palette[6].sortedHsl[i][0];
+        let s = palette[6].sortedHsl[i][1];
+        let l = palette[6].sortedHsl[i][2];
+
         let updateClass = document.querySelectorAll(`.color${i+1}`);
         updateClass.forEach(function(element) {
             if (i != 4) {
-                element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+                element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+                element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;
             } else {
-                element.style.color = `rgb(${r}, ${g}, ${b}`;
+                element.style.color = `hsl(${h}, ${s}%, ${l}%)`;
             }            
         });
+
+        if (i === 2 || i === 3) {
+            updateText(i);
+        }
 
         // Update SVG icons
         let svgIcon = document.getElementById(`color-block-${i+1}`);
@@ -297,6 +286,33 @@ const showNewColors = function(fromSaved) {
     }
 
     return updateBackground(fromSaved);
+}
+
+const updateText = function(i) {
+
+    // Colors brightness
+    let l = palette[6].sortedHsl[i][2];
+
+    // Update button text
+    let updateTextDark = document.querySelectorAll(`.color${i+1}`);
+    updateTextDark.forEach(function(element) {
+        // Particular color needs dark text
+        if (parseInt(l) > 45) {
+            let textH = palette[6].sortedHsl[0][0]
+            let textS = palette[6].sortedHsl[0][1]
+            let textL = palette[6].sortedHsl[0][2]
+
+            element.style.color = `black`;
+        }
+        // Particular color needs light text
+        else {
+            let textH = palette[6].sortedHsl[4][0]
+            let textS = palette[6].sortedHsl[4][1]
+            let textL = palette[6].sortedHsl[4][2]
+
+            element.style.color = `white`;
+        }
+    })
 }
 
 // Fetches around 28 background images from Unsplash and loads them into backgroundImages array
@@ -380,6 +396,7 @@ const checkBrightness = function(imageSrc) {
     })
 }
 
+// Change text color based on dark mode status
 const changeText = function(isDark) {
     let hexTextEls = document.querySelectorAll('.displayHex');
     hexTextEls.forEach(function(element) {
@@ -391,6 +408,7 @@ const changeText = function(isDark) {
     })
 }
 
+// Display HEX value for colors in current palette
 const updateHexTextEls = function() {
 
     for (let i=0; i < 5; i++) {
@@ -410,10 +428,10 @@ function ColorToHex(color) {
     return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
 }
 
+// Convert RGB color values to Hex
 function ConvertRGBtoHex(red, green, blue) {
     return "#" + ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
 }
-
 
 // Takes unsorted RGB colors from Colormind and sorts them from darkest to lightest into a new array
 const sortColors = function(rgbColors) {
@@ -527,21 +545,25 @@ const getImageLightness = function(imageSrc,callback) {
     }
 }
 
+// Handler for generate palettes button
 const generateHandler = function() {
 
     requestColorPalette();
 }
 
+// Event listener for the generate button
 buttonEl.addEventListener('click', generateHandler);
 
 loadBackgrounds();
 loadLocalStorage();
 showSavedPalettes(false);
 
+// Event listener for palette save button
 $(".saveBtn").on("click", function() {
     //add current palette to array of palettes
-    // Pushing palette to savedPalettes makes savedPalettes update when palette updates (arrays are references)
-    savedPalettes.push(palette);
+    // Deep copy made so that arrays don't point at same place in memory (so that when palette is updated savedPalettes isn't updated as well)
+    let paletteDeepCopy = JSON.parse(JSON.stringify(palette));
+    savedPalettes.push(paletteDeepCopy);
     showSavedPalettes(true);
     updateLocalStorage();
     if (!errorFlag) {
@@ -549,18 +571,20 @@ $(".saveBtn").on("click", function() {
     } 
 });
 
-// Previously saved palette was clicked
+// Event listener for pPreviously saved palettes when clicked
 $("#savedPalettes").on("click", "span", function() {
     //reload saved palette
     var index = this.getAttribute("data-saved");
-    palette = savedPalettes[index];
+    // Deep copy made so that arrays don't point at same place in memory (so that when savedPalettes is updated palette isn't updated as well)
+    let savedPaletteDeepCopy = JSON.parse(JSON.stringify(savedPalettes));
+    palette = savedPaletteDeepCopy[index];
     showNewColors(true);
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
 });
 
-// Delete button for a saved palette was clicked
+// Event listener for delete button for a saved palette was clicked
 $("#savedPalettes").on("click", "button", function() {
     //Delete saved palette
     console.log(this);

@@ -51,6 +51,7 @@ h1 {
     margin: 90px 20px 0px 20px;
 }
 
+/* Style for generated palette*/
 svg {     
     width: 100%;
     border: 1px solid #272f2a;
@@ -58,16 +59,30 @@ svg {
     border-radius: 20px;
 }
 
+/*Style for App background image*/
 .background-img {
     background-image: url("../images/background.png");
     height: 100%;
     background-position: center;
 }
 
+/*Style for generated palette Start*/
 .palette div div {
     margin: 5px;
 }
 
+
+.displayHex {
+    text-align: center;
+}
+
+.displayHex input {
+    width: 80px;
+    text-align: center;
+}
+/*Style for generated palette End*/
+
+/*Style for Button Style start*/
 .btn-container {
     display: flex;
     flex-direction: row;
@@ -107,16 +122,9 @@ button:hover {
     top: -40px;
     right: -55px;
 }
+/*Style for Button Style End*/
 
-.displayHex {
-    text-align: center;
-}
-
-.displayHex input {
-    width: 80px;
-    text-align: center;
-}
-
+/*Style for Saved Palette Style Start*/
 #savedPalettesPanel {
     width: 300px;
     margin: auto;
@@ -130,13 +138,17 @@ button:hover {
     text-align: center;
 }
 
-/*testing style*/
+.savedPaletteContainer {
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
 
 .savedBlock, .deletePaletteBtn  {
     display: inline-block;
     width: 35px;
     height: 35px;
-    border: 2px white solid; 
+    border: 1px black solid; 
 }
 .svgTrash {
     width: 90%;
@@ -144,20 +156,20 @@ button:hover {
     margin-bottom: 5px;
 }
 
-/*Utility classes*/
-.visible {
-    display: inline-block;
+.savedpal {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
-/*Hide Content with removing the space*/
-.hidden {
-    display: hidden;
+.saved-container {
+    padding: 10px;
+    border-color: #4b9899 !important;
+    border-radius: 20px;
+    width: 30%;
 }
+/*Style for Saved Palette Style End*/
 
-.invisible {
-    display: none;
-}
-
+/* Example Palette Usage Start*/
 .extemp-container {
     margin: auto;
     margin-top: 60px;
@@ -180,6 +192,7 @@ button:hover {
     background-color: #4b9899;
     padding: 15px;
     width: 30%;
+    min-width: 330px;
     margin: auto;
     margin-top: 40px;
 }
@@ -254,19 +267,23 @@ button:hover {
     font-variant: normal;
     text-transform: none;
 }
+/* Example Palette Usage End*/
 
-.savedpal {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
+/*Utility classes Start*/
+.visible {
+    display: inline-block;
 }
 
-.saved-container {
-    padding: 10px;
-    border-color: #4b9899 !important;
-    border-radius: 20px;
-    width: 30%;
+/*Hide Content with removing the space*/
+.hidden {
+    display: hidden;
+}
+
+.invisible {
+    display: none;
 }
 
 .positionRelative {
     position: relative;
 }
+/*Utility classes End*/
