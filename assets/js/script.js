@@ -297,12 +297,12 @@ const updateText = function(i) {
     let updateTextDark = document.querySelectorAll(`.color${i+1}`);
     updateTextDark.forEach(function(element) {
         // Particular color needs dark text
-        if (parseInt(l) > 35) {
+        if (parseInt(l) > 45) {
             let textH = palette[6].sortedHsl[0][0]
             let textS = palette[6].sortedHsl[0][1]
             let textL = palette[6].sortedHsl[0][2]
 
-            element.style.color = `hsl(${textH}, ${textS}%, ${textL}%)`;
+            element.style.color = `black`;
         }
         // Particular color needs light text
         else {
@@ -310,7 +310,7 @@ const updateText = function(i) {
             let textS = palette[6].sortedHsl[4][1]
             let textL = palette[6].sortedHsl[4][2]
 
-            element.style.color = `hsl(${textH}, ${textS}%, ${textL}%)`;
+            element.style.color = `white`;
         }
     })
 }

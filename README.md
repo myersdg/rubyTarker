@@ -9,5 +9,9 @@ This application requires the use of a proxy server to properly handle http fetc
 ## Web Application
 [Click here to view](https://myersdg.github.io/rubyTarker/)
 
+
+https://user-images.githubusercontent.com/89796902/161391450-6fd13d61-7bd9-478d-a3b0-1f36daa7d2c6.mp4
+
+
 ## Made with care
 By Antrell Kent, Alex Glaubitz, Brittany Young, and Daniel Myers.
