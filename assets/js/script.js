@@ -1,19 +1,7 @@
 // TODO JAVASCRIPT BASIC FUNCTIONALITY:
-// (DONE?) Function to update elements on page to new colors, take RGB values from palette
-// (DONE?) How do we target the SVG files and update the colors for the above function?
-// (DONE?) What are the class names that are being targeted for each color specifically?
-// (DONE?) Function to fetch request from Unsplash on page load, returns data to a black and white background image
-// (DONE?) After fetch request from Unsplash, update a variable with fetch data so that when the user generates a new background it doesn't have to fetch every time (we have a limit on fetches)
-// (DONE?)Function to display background image credit when updating background
+// Function to display background image credit when updating background
 // Function to allow user to lock background image
-// Need to know what element to update with artist credit words
-// What color is the background receiving?
-// (DONE?) Update anonymous onclick function to disable locking
-// Function to update global array variable for saved design(s), executes on page load and after user clicks save design
-// Function to save saved designs global variable (palette and hero) to local storage, retain order from palette as elements will always update the same given the same order
-   // Done:  palette saved to local storage
-// (Done) Function to update saved favorites on the sidebar, 
-// (Done) What class or ID specifically needs to be targeted on the DOM to update the sidebar?
+// Naming saved palettes
 // TODO JAVASCRIPT EXTRA FUNCTIONALITY (NOT APART OF MVP):
 // (DONE?) Function to check background image for lightness (so that a predominantly dark backgrounds aren't selected) (potentially could use - https://stackoverflow.com/questions/13762864/image-brightness-detection-in-client-side-script)
 // If background image is too dark for dark text, change to light text
