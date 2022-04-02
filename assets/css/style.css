@@ -66,7 +66,7 @@ svg {
     background-position: center;
 }
 
-/*Styple for generated palette Start*/
+/*Style for generated palette Start*/
 .palette div div {
     margin: 5px;
 }
@@ -80,7 +80,7 @@ svg {
     width: 80px;
     text-align: center;
 }
-/*Styple for generated palette End*/
+/*Style for generated palette End*/
 
 /*Style for Button Style start*/
 .btn-container {
@@ -191,6 +191,7 @@ button:hover {
     background-color: #4b9899;
     padding: 15px;
     width: 30%;
+    min-width: 420px;
     margin: auto;
     margin-top: 40px;
 }
