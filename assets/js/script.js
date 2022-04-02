@@ -270,12 +270,20 @@ const showNewColors = function(fromSaved) {
         let g = palette[i].rgb[1];
         let b = palette[i].rgb[2];
 
+        let h = palette[6].sortedHsl[i][0];
+        let s = palette[6].sortedHsl[i][1];
+        let l = palette[6].sortedHsl[i][2];
+
         let updateClass = document.querySelectorAll(`.color${i+1}`);
         updateClass.forEach(function(element) {
             if (i != 4) {
-                element.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+                element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+                element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;
+                /*
+                border: 3px #272f2a solid;
+                */
             } else {
-                element.style.color = `rgb(${r}, ${g}, ${b}`;
+                element.style.color = `hsl(${h}, ${s}%, ${l}%)`;
             }            
         });
 
