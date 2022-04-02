@@ -271,13 +271,14 @@ const showNewColors = function(fromSaved) {
             if (i != 4) {
                 element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
                 element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;
-                /*
-                border: 3px #272f2a solid;
-                */
             } else {
                 element.style.color = `hsl(${h}, ${s}%, ${l}%)`;
             }            
         });
+
+        if (i === 2 || i === 3) {
+            updateText(i);
+        }
 
         // Update SVG icons
         let svgIcon = document.getElementById(`color-block-${i+1}`);
@@ -285,6 +286,33 @@ const showNewColors = function(fromSaved) {
     }
 
     return updateBackground(fromSaved);
+}
+
+const updateText = function(i) {
+
+    // Colors brightness
+    let l = palette[6].sortedHsl[i][2];
+
+    // Update button text
+    let updateTextDark = document.querySelectorAll(`.color${i+1}`);
+    updateTextDark.forEach(function(element) {
+        // Particular color needs dark text
+        if (parseInt(l) > 45) {
+            let textH = palette[6].sortedHsl[0][0]
+            let textS = palette[6].sortedHsl[0][1]
+            let textL = palette[6].sortedHsl[0][2]
+
+            element.style.color = `black`;
+        }
+        // Particular color needs light text
+        else {
+            let textH = palette[6].sortedHsl[4][0]
+            let textS = palette[6].sortedHsl[4][1]
+            let textL = palette[6].sortedHsl[4][2]
+
+            element.style.color = `white`;
+        }
+    })
 }
 
 // Fetches around 28 background images from Unsplash and loads them into backgroundImages array
