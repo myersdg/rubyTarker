@@ -1,0 +1,288 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 1792x828px at 326ppi for IPHONE XR, 11*/
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 2)
+    and (orientation : portrait) {
+}
+
+/* 2688x1242px at 458ppi for IPHONE XS MAX */
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 3)
+    and (orientation : portrait) {
+}
+
+body {
+    padding-top: 100px;
+}
+
+.title-container {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.title {
+    margin-top: 0px;
+    font-size: larger;
+    background-color: #272f2a;
+    border: 10px solid #272f2a;
+    border-radius: 20px;
+    height: auto;
+    color: #fef9e9;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.pure-g {
+    margin: 90px 20px 0px 20px;
+}
+
+/* Style for generated palette*/
+svg {     
+    width: 100%;
+    border: 1px solid #272f2a;
+    display: grid;
+    border-radius: 20px;
+}
+
+/*Style for App background image*/
+.background-img {
+    background-image: url("../images/background.png");
+    height: 100%;
+    background-position: center;
+}
+
+/*Style for generated palette Start*/
+.palette div div {
+    margin: 5px;
+}
+
+
+.displayHex {
+    text-align: center;
+}
+
+.displayHex input {
+    width: 80px;
+    text-align: center;
+}
+/*Style for generated palette End*/
+
+/*Style for Button Style start*/
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 90px;
+}
+
+button:hover {
+    outline: 2px solid white;
+}
+
+.generateBtn {
+    padding: 10px;
+    border: 1px solid #272f2a;
+    border-radius: 20px;
+    background-color: #c81a15;
+    color: white;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.saveBtn {
+    padding: 10px;
+    border: 1px solid #272f2a;
+    border-radius: 20px;
+    background-color: #7dcccb;
+    color: white;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.svgLock {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    padding: 5px;
+    background-color: white;
+    position: absolute;
+    top: -40px;
+    right: -55px;
+}
+/*Style for Button Style End*/
+
+/*Style for Saved Palette Style Start*/
+#savedPalettesPanel {
+    width: 300px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-color: #7dcccb;
+    color: #fef9e9;
+}
+
+#savedPalettes, div {
+    text-align: center;
+}
+
+.savedPaletteContainer {
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.savedBlock, .deletePaletteBtn  {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border: 1px black solid; 
+}
+.svgTrash {
+    width: 90%;
+    height: 90%;
+}
+
+.savedpal {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+}
+
+.saved-container {
+    padding: 10px;
+    border-color: #4b9899 !important;
+    border-radius: 20px;
+    width: 30%;
+}
+/*Style for Saved Palette Style End*/
+
+/* Example Palette Usage Start*/
+.extemp-container {
+    margin: auto;
+    margin-top: 60px;
+    border: 3px #272f2a solid;
+    border-radius: 20px;
+    background-color: #272f2a;
+    padding: 10px;
+    width: 55%;
+}
+
+.extemp {
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.text-border {
+    border: 3px solid #4b9899;
+    border-radius: 20px;
+    background-color: #4b9899;
+    padding: 15px;
+    width: 30%;
+    min-width: 330px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.textExample, p {
+    color: white;
+    text-align: center;
+    font-size: large;
+}
+
+.lzdog1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.lzdog3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.lzdog4 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.lzdog2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+}
+
+.lzdog5 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    letter-spacing: -1px;
+    word-spacing: 2px;
+    color: #fef9e9;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: oblique;
+    font-variant: normal;
+    text-transform: none;
+}
+/* Example Palette Usage End*/
+
+/*Utility classes Start*/
+.visible {
+    display: inline-block;
+}
+
+/*Hide Content with removing the space*/
+.hidden {
+    display: hidden;
+}
+
+.invisible {
+    display: none;
+}
+
+.positionRelative {
+    position: relative;
+}
+/*Utility classes End*/
