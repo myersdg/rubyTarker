@@ -126,10 +126,10 @@ button:hover {
 /*Style for Button Style End*/
 
 /*Style for Saved Palette Style Start*/
-#savedPalettesPanel {
+#savedPalettesPanel, #formDiv {
     width: 300px;
     margin: auto;
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     margin-bottom: 10px;
     background-color: #7dcccb;
     color: #fef9e9;
@@ -156,12 +156,12 @@ button:hover {
     height: 90%;
 }
 
-.savedpal {
+.savedpal, #formDiv  {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
-.saved-container {
+.saved-container, #formDiv {
     padding: 10px;
     border-color: #4b9899 !important;
     border-radius: 20px;

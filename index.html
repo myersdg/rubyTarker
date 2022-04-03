@@ -130,9 +130,9 @@
             </div>
         </div>
         
-        <div class="pure-u-1-2">
+        <div id="formDiv" class="pure-u-1-2  color2">
             <form id="colorForm">
-                <label for="startColor"><h2>Enter a starter hex color</h2></label></br>
+                <label for="startColor"><h4>Enter a starter hex color</h4></label></br>
                 <input class="startColor" type="text" id="startColor" name="startColor" /></br>
                 <button id="submitColor" type="button">Generate</button>
             </form>
@@ -143,43 +143,48 @@
     </div>
 
     <!-- Example content needs to be styled - will update with newly generated colors -->
-    <section>
-        <h2>How it works:</h2>
-        <div>
-            <h3>Generate</h3>
-            <p>Simply click on the "Generate" button above and a new palette of colors and a frontpage image will be generated. The newly generated colors will update on this page to help you see if the design is right for you.</p>
-        </div>
+    
+    <div class="pure-g"> 
+        <div class="pure-u-1-1">
+            <section>
+                <h2>How it works:</h2>
+                <div>
+                    <h3>Generate</h3>
+                    <p>Simply click on the "Generate" button above and a new palette of colors and a frontpage image will be generated. The newly generated colors will update on this page to help you see if the design is right for you.</p>
+                </div>
 
-        <div>
-            <h3>Lock</h3>
-            <p>You can lock a color by clicking on that color's block at the top of the page. Locked colors won't change (much) when generating a new design.</p>
-        </div>
+                <div>
+                    <h3>Lock</h3>
+                    <p>You can lock a color by clicking on that color's block at the top of the page. Locked colors won't change (much) when generating a new design.</p>
+                </div>
 
-        <div>
-            <h3>Save</h3>
-            <p>Once you've decided you like a particular design, press the save button. Your design will show up in the "Saved Palettes" section.</p>
-        </div>
+                <div>
+                    <h3>Save</h3>
+                    <p>Once you've decided you like a particular design, press the save button. Your design will show up in the "Saved Palettes" section.</p>
+                </div>
 
-        <div>
-            <h3>Revisit</h3>
-            <p>Try as many designs as you want! There's no limit to the amount you can save.</p>
-        </div>
-    </section>
+                <div>
+                    <h3>Revisit</h3>
+                    <p>Try as many designs as you want! There's no limit to the amount you can save.</p>
+                </div>
+            </section>
 
-    <section>
-        <h2>Why do you use a proxy server?</h2>
-        <div>
-            <h3>The simple explanation:</h3>
-            <p>It helps us retrieve our color palette data by acting a middleman between where we get our data and where we host our web page.</p>
+            <section>
+                <h2>Why do you use a proxy server?</h2>
+                <div>
+                    <h3>The simple explanation:</h3>
+                    <p>It helps us retrieve our color palette data by acting a middleman between where we get our data and where we host our web page.</p>
+                </div>
+                <div>
+                    <h3>The more technical explanation:</h3>
+                    <p>We're hosting our website using GitHub Pages, which uses the HTTPS protocol. The ColorMind API, where we receive our color palettes, uses the HTTP protocol (notice the lack of "S").
+                        As a result of the difference between these two protocols, most modern browsers block the ColorMind API. CORS Anywhere, our proxy server, acts as an
+                        intermediary and sends ColorMind's data to GitHub Pages using the HTTPS protocol. This allows your browser to accept palettes coming from the ColorMind API.
+                    </p>
+                </div>
+            </section>
         </div>
-        <div>
-            <h3>The more technical explanation:</h3>
-            <p>We're hosting our website using GitHub Pages, which uses the HTTPS protocol. The ColorMind API, where we receive our color palettes, uses the HTTP protocol (notice the lack of "S").
-                As a result of the difference between these two protocols, most modern browsers block the ColorMind API. CORS Anywhere, our proxy server, acts as an
-                intermediary and sends ColorMind's data to GitHub Pages using the HTTPS protocol. This allows your browser to accept palettes coming from the ColorMind API.
-            </p>
-        </div>
-    </section>
+    </div>
 
     <!-- User text example section
     <div class="extemp-container">
