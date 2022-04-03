@@ -54,22 +54,22 @@ let hslPalette = {
 };
 
 // Remove dom element from view but not the consumed space
-var hideElement = function (element) {
+const hideElement = function (element) {
     $(element).removeClass( "visible" ).addClass( "invisible" );
 };
 
 // Remove dom element from view but not the consumed space
-var hideContent = function (element) {
+const hideContent = function (element) {
     $(element).removeClass( "visible" ).addClass( "hidden" );
 };
 
 // Make the targeted element visible
-var showContent = function (element) {
+const showContent = function (element) {
     $(element).removeClass( "hidden invisible" ).addClass( "visible" );
 };
 
 //Remove the Dom element with the matching selector
-var removeElement = function (selector) {
+const removeElement = function (selector) {
     var element = document.querySelector(selector);
     if(element){
         element.remove();
@@ -77,12 +77,12 @@ var removeElement = function (selector) {
 };
 
 // Save Array of Palettes to local storage
-var updateLocalStorage = function () {
+const updateLocalStorage = function () {
     localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
 };
 
 // Load saved content from local storage back to the app
-var loadLocalStorage = function () {
+const loadLocalStorage = function () {
     //Get saved palettes from localStorage.
     savedPalettes = localStorage.getItem("savedPalettes");
   
@@ -96,7 +96,7 @@ var loadLocalStorage = function () {
 
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
-var showSavedPalettes = function (updated) {
+const showSavedPalettes = function (updated) {
     var i=0
 
     //Save button was clicked
@@ -145,7 +145,7 @@ var showSavedPalettes = function (updated) {
 };
 
 // Function to show user the locked status, calls from anonymous onclick function
-var displayLockedStatus = function (locked, i) {
+const displayLockedStatus = function (locked, i) {
    var selector = "[data-locked=" + i + "]";
     var iconEL = $(selector);
     if(locked) {
