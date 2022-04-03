@@ -108,22 +108,37 @@
         <button class="saveBtn color4 buttonText">Save</button>
     </div>
 
-    <!-- User saved palette section -->
-    <div class="saved-container color2" id="savedPalettesPanel">
-        <h4 class="savedpal color5">Saved Palettes</h4>
-        <div id="savedPalettes">
-            <!--
-            <div data-saved="0">
-                <span class="savedBlock" data-saved="0"> 1</span>
-                <span class="savedBlock" data-saved="0"> 2</span>
-                <span class="savedBlock" data-saved="0"> 3</span>
-                <span class="savedBlock" data-saved="0"> 4</span>
-                <span class="savedBlock" data-saved="0"> 5</span>
-                <button class="deletePaletteBtn" data-saved="0">
-                    <img src="assets/images/trash-svgrepo-com.svg" alt="" class="svgTrash" />
-                </button>
+    <div class="pure-g">
+        <div class="pure-u-1-2">
+            <!-- User saved palette section -->
+            <div class="saved-container color2" id="savedPalettesPanel">
+                <h4 class="savedpal color5">Saved Palettes</h4>
+                <div id="savedPalettes">
+                    <!--
+                    <div data-saved="0">
+                        <span class="savedBlock" data-saved="0"> 1</span>
+                        <span class="savedBlock" data-saved="0"> 2</span>
+                        <span class="savedBlock" data-saved="0"> 3</span>
+                        <span class="savedBlock" data-saved="0"> 4</span>
+                        <span class="savedBlock" data-saved="0"> 5</span>
+                        <button class="deletePaletteBtn" data-saved="0">
+                            <img src="assets/images/trash-svgrepo-com.svg" alt="" class="svgTrash" />
+                        </button>
+                    </div>
+                    -->
+                </div>
             </div>
-            -->
+        </div>
+        
+        <div class="pure-u-1-2">
+            <form id="colorForm">
+                <label for="startColor"><h2>Enter a starter hex color</h2></label></br>
+                <input class="startColor" type="text" id="startColor" name="startColor" /></br>
+                <button id="submitColor" type="button">Generate</button>
+            </form>
+            <div id="colorInputAlert" class="invisible">
+                <p>Only six-digit hex colors are allowed</p>
+            </div>
         </div>
     </div>
 
