@@ -53,7 +53,7 @@ let hslPalette = {
     sorted: [[143, 9, 17], [2, 81, 43], [181, 34, 45], [179, 44, 65], [46, 91, 95]]
 };
 
-// Remove dom element from view but not the consumed space
+// Remove dom element from view and the consumed space
 const hideElement = function (element) {
     $(element).removeClass( "visible" ).addClass( "invisible" );
 };
@@ -98,7 +98,8 @@ const loadLocalStorage = function () {
 //Function from https://convertingcolors.com/blog/article/convert_hex_to_rgb_with_javascript.html
 String.prototype.convertToRGB = function(){
     if(this.length != 6){
-        throw "Only six-digit hex colors are allowed.";
+        //throw "Only six-digit hex colors are allowed.";
+        showContent($("colorInputAlert"));
     }
 
     var aRgbHex = this.match(/.{1,2}/g);
@@ -215,7 +216,6 @@ const requestColorPalette = function(userColor) {
             if (!palette[i].locked) {
                 // Update locked colors into data.input
                 data.input[i] = userColor;
-                console.log("input", data.input);
                 break;
             }
         }
@@ -234,7 +234,6 @@ const requestColorPalette = function(userColor) {
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
             var rgbColors = JSON.parse(http.responseText).result;
-            console.log("rgbColors", rgbColors);
             errorFlag = false;
             hideElement($("#CORS"));
             return updatePalette(rgbColors);
@@ -639,19 +638,19 @@ $("#savedPalettes").on("click", "button", function() {
 
     savedPalettes = tempArray
     updateLocalStorage();
-    console.log("savedPalettes.length", savedPalettes.length);
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
 });
 
 $("#submitColor").on("click", function(event) {
+    hideElement($("colorInputAlert"));
     event.preventDefault();
-    console.log(this);
     let hexColor = $("#startColor").val();
-    console.log("color", hexColor);
     let rgbConvert = hexColor.convertToRGB();
-    console.log("converted color", rgbConvert);
     requestColorPalette(rgbConvert);
-
+    
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    } 
 });
