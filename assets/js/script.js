@@ -585,13 +585,17 @@ $("#savedPalettes").on("click", "span", function() {
 });
 
 // Event listener for delete button for a saved palette was clicked
-$("#savedPalettes").on("click", "button", function() {
+$("#savedPalettes").on("click", "button", function(event) {
     //Delete saved palette
-    console.log(this);
-    var index = this.getAttribute("data-saved");
-    console.log("index", index);
+
+    let currentContainer = this.parentNode;
+    let parentContainer = currentContainer.parentNode;
+    let index = Array.prototype.indexOf.call(parentContainer.children, currentContainer);
+
+    var dataSavedInt = this.getAttribute("data-saved");
+    console.log("index", dataSavedInt);
     
-    let selector = "div[data-saved=" + index + "]";
+    let selector = "div[data-saved=" + dataSavedInt + "]";
     $(selector).remove();
 
     console.log("savedPalettes.length", savedPalettes.length);
