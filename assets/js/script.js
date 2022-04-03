@@ -94,6 +94,22 @@ const loadLocalStorage = function () {
     }
 };
 
+//convert hex color to rgb
+//Function from https://convertingcolors.com/blog/article/convert_hex_to_rgb_with_javascript.html
+String.prototype.convertToRGB = function(){
+    if(this.length != 6){
+        throw "Only six-digit hex colors are allowed.";
+    }
+
+    var aRgbHex = this.match(/.{1,2}/g);
+    var aRgb = [
+        parseInt(aRgbHex[0], 16),
+        parseInt(aRgbHex[1], 16),
+        parseInt(aRgbHex[2], 16)
+    ];
+    return aRgb;
+};
+
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
 const showSavedPalettes = function (updated) {
@@ -182,16 +198,27 @@ const randomNum = function(min, max) {
   }
 
 // Request a new color palette from Colormind API 
-const requestColorPalette = function() {
+const requestColorPalette = function(userColor) {
     
     // CORS anywhere helps GitHub Pages accept http fetch requests
     // If this ever stops working, check out the console log for a link to follow to be granted temporary access again
     let corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
     var apiUrl = "http://colormind.io/api/";
     let url = corsAnywhereUrl + apiUrl;
-    var data = {
+    let data = {
         model : "default",
         input : ["N","N","N","N","N"]
+    }
+
+    if(userColor)    {
+        for (let i=0; i < palette.length; i++) {
+            if (!palette[i].locked) {
+                // Update locked colors into data.input
+                data.input[i] = userColor;
+                console.log("input", data.input);
+                break;
+            }
+        }
     }
 
     // Check palette to see if any colors are locked
@@ -548,7 +575,7 @@ const getImageLightness = function(imageSrc,callback) {
 // Handler for generate palettes button
 const generateHandler = function() {
 
-    requestColorPalette();
+    requestColorPalette([]);
 }
 
 // Event listener for the generate button
@@ -612,4 +639,15 @@ $("#savedPalettes").on("click", "button", function(event) {
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
+});
+
+$("#submitColor").on("click", function(event) {
+    event.preventDefault();
+    console.log(this);
+    let hexColor = $("#startColor").val();
+    console.log("color", hexColor);
+    let rgbConvert = hexColor.convertToRGB();
+    console.log("converted color", rgbConvert);
+    requestColorPalette(rgbConvert);
+
 });
