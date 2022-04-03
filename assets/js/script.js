@@ -234,6 +234,7 @@ const requestColorPalette = function(userColor) {
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
             var rgbColors = JSON.parse(http.responseText).result;
+            console.log("rgbColors", rgbColors);
             errorFlag = false;
             hideElement($("#CORS"));
             return updatePalette(rgbColors);
