@@ -572,7 +572,10 @@ $(".saveBtn").on("click", function() {
 });
 
 // Event listener for pPreviously saved palettes when clicked
-$("#savedPalettes").on("click", "span", function() {
+$("#savedPalettes").on("click", "div", function(event) {
+    // guard clause in case trash icon was clicked
+    if (event.className === 'svgTrash') {return};
+
     //reload saved palette
     var index = this.getAttribute("data-saved");
     // Deep copy made so that arrays don't point at same place in memory (so that when savedPalettes is updated palette isn't updated as well)
@@ -585,7 +588,7 @@ $("#savedPalettes").on("click", "span", function() {
 });
 
 // Event listener for delete button for a saved palette was clicked
-$("#savedPalettes").on("click", "button", function(event) {
+$("#savedPalettes").on("click", "button", function() {
     //Delete saved palette
 
     let currentContainer = this.parentNode;
