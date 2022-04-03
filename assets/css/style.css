@@ -23,7 +23,8 @@
 }
 
 body {
-    padding-top: 100px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .title-container {
@@ -61,9 +62,12 @@ svg {
 
 /*Style for App background image*/
 .background-img {
+    padding-top: 100px;
+    display: block;
     background-image: url("../images/background.png");
-    height: 100%;
+    height: 100vh;
     background-position: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /*Style for generated palette Start*/
@@ -116,6 +120,37 @@ button:hover {
     background-color: #7dcccb;
     color: white;
     font-family: Georgia, Times, "Times New Roman", serif;
+    max-height: 38.4px;
+}
+
+#colorForm {
+    position: relative;
+    display: flex;
+}
+
+#startColor {
+    position: absolute;
+    top: -43.5px;
+    left: -43.475px;
+    text-align: center;
+}
+
+#generate-colors {
+    position: absolute;
+}
+
+#startLabel {
+    position: absolute;
+    top: -60.8px;
+    left: -20px;
+    text-align: center;
+    font-weight: normal;
+    color: red;
+    background-color: rgba(255, 255, 255, 0.50);
+    border-radius: 5px;
+    margin: auto;
+    min-width: 124px;
+    font-size: 14px;
 }
 
 .svgLock {
@@ -273,6 +308,55 @@ button:hover {
     font-variant: normal;
     text-transform: none;
 }
+
+.how-it-works {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-bottom: 60px;
+}
+
+.how-it-works h2 {
+    font-size: 44px;
+    padding: 20px 10px;
+    margin: auto;
+}
+
+.how-step {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.how-step h3 {
+    font-size: 28px;
+    padding: 15px 10px;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.how-step p {
+    padding: 10px 10px;
+}
+
+.how-step h3,
+.how-step p {
+    text-align: left;
+}
+
+.proxy-explain-container h2 {
+    font-size: 34px;
+}
+
+.proxy-explain h3 {
+    font-size: 24px;
+}
+
+.proxy-explain h3,
+.proxy-explain p {
+    text-align: right;
+}
+
 /* Example Palette Usage End*/
 
 /*Utility classes Start*/

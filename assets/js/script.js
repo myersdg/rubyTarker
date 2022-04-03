@@ -573,9 +573,41 @@ const getImageLightness = function(imageSrc,callback) {
 }
 
 // Handler for generate palettes button
-const generateHandler = function() {
+const generateHandler = function(event) {
+    event.preventDefault();
 
-    requestColorPalette([]);
+    hideElement($("colorInputAlert"));
+    let hexColor = $("#startColor").val().trim();
+    $('#startColor').val('')
+    if (hexColor) {
+
+        // Remove any hashes at the beginning of the user input
+        while (hexColor[0] === '#') {
+            hexColor = hexColor.slice(1)
+        }
+
+        // Taken from https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation
+        // Checks a string for characters matching a hex value - use hexTest.test('your_value_here')
+        let hexTest = /^([0-9A-F]{3}){1,2}$/i;
+        if (hexTest.test(hexColor)) {
+            let rgbConvert = hexColor.convertToRGB();
+            return requestColorPalette(rgbConvert);
+        } 
+        // Hex value is invalid
+        else {
+            // Make alert to user visible for 5 seconds
+            $('#startLabel').attr('class', 'visible');
+            setTimeout(function() {
+                $('#startLabel').attr('class', 'invisible');
+            }, 5000);
+        }
+    }
+
+    requestColorPalette();
+
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    }
 }
 
 // Event listener for the generate button
@@ -643,14 +675,8 @@ $("#savedPalettes").on("click", "button", function() {
     } 
 });
 
+/*
 $("#submitColor").on("click", function(event) {
-    hideElement($("colorInputAlert"));
-    event.preventDefault();
-    let hexColor = $("#startColor").val();
-    let rgbConvert = hexColor.convertToRGB();
-    requestColorPalette(rgbConvert);
     
-    if (!errorFlag) {
-        hideElement($("#CORS"));
-    } 
 });
+*/
