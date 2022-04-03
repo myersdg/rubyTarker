@@ -80,6 +80,12 @@ svg {
     width: 80px;
     text-align: center;
 }
+
+#startColor {
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 20px;
+}
 /*Style for generated palette End*/
 
 /*Style for Button Style start*/
@@ -94,7 +100,7 @@ button:hover {
     outline: 2px solid white;
 }
 
-.generateBtn {
+.generateBtn, #submitColor {
     padding: 10px;
     border: 1px solid #272f2a;
     border-radius: 20px;
