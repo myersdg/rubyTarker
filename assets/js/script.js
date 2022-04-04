@@ -293,18 +293,33 @@ const showNewColors = function(fromSaved) {
         let s = palette[6].sortedHsl[i][1];
         let l = palette[6].sortedHsl[i][2];
 
-        let updateClass = document.querySelectorAll(`.color${i+1}`);
+        // Update all text color classes
+        let updateClass = document.querySelectorAll(`.text${i+1}`);
         updateClass.forEach(function(element) {
-            if (i != 4) {
-                element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-                element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;
-            } else {
-                element.style.color = `hsl(${h}, ${s}%, ${l}%)`;
-            }            
+            element.style.color = `hsl(${h}, ${s}%, ${l}%)`;  
+        });
+
+        // Update all background color classes
+        updateClass = document.querySelectorAll(`.background${i+1}`);
+        updateClass.forEach(function(element) {
+            element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;  
+        });
+
+        // Update all background overlay color classes
+        updateClass = document.querySelectorAll(`.overlay${i+1}`);
+        let sortedRgb = HSLToRGB(parseInt(h), parseInt(s), parseInt(l));
+        updateClass.forEach(function(element) {
+            element.style.background = `linear-gradient(rgba(${sortedRgb[0]}, ${sortedRgb[1]}, ${sortedRgb[2]}, 0.50), rgba(${sortedRgb[0]}, ${sortedRgb[1]}, ${sortedRgb[2]}, 0.50))`;
+        });
+
+        // Update all border color classes
+        updateClass = document.querySelectorAll(`.border${i+1}`);
+        updateClass.forEach(function(element) {
+            element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;  
         });
 
         if (i === 2 || i === 3) {
-            updateText(i);
+            updateButtonText(i);
         }
 
         // Update SVG icons
@@ -315,7 +330,7 @@ const showNewColors = function(fromSaved) {
     return updateBackground(fromSaved);
 }
 
-const updateText = function(i) {
+const updateButtonText = function(i) {
 
     // Colors brightness
     let l = palette[6].sortedHsl[i][2];
@@ -325,18 +340,10 @@ const updateText = function(i) {
     updateTextDark.forEach(function(element) {
         // Particular color needs dark text
         if (parseInt(l) > 45) {
-            let textH = palette[6].sortedHsl[0][0]
-            let textS = palette[6].sortedHsl[0][1]
-            let textL = palette[6].sortedHsl[0][2]
-
             element.style.color = `black`;
         }
         // Particular color needs light text
         else {
-            let textH = palette[6].sortedHsl[4][0]
-            let textS = palette[6].sortedHsl[4][1]
-            let textL = palette[6].sortedHsl[4][2]
-
             element.style.color = `white`;
         }
     })
@@ -394,15 +401,11 @@ const updateBackground = function(fromSaved) {
     backgroundEl.style.background = `linear-gradient(rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50), rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50)), url(${imageUrl}) center center`;
     backgroundEl.style.backgroundSize = 'cover';
 
-    /* LEAVE CODE HERE - WILL UNCOMMENT WHEN WE HAVE FOOTER STYLING
     // Attribute artist of background in footer
-    let el = document.getElementById('~~~~~~UPDATE ME~~~~~~~')
+    let el = document.getElementById('artistCredit')
     let artistUrl = randomImage.user.links.html;
     let artistName = randomImage.user.name;
-    el.innerHTML = `<span>Photo by <a href="${artistUrl}?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">${artistName}</a> on <a href="https://unsplash.com/?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">Unsplash</a></span>`
-    // Update all classes below separated by commas
-    el.classList.add('ADD', 'CLASSES', 'HERE')
-    */
+    el.innerHTML = `<span>Photo by <a href="${artistUrl}?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">${artistName}</a> on <a href="https://unsplash.com/?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">Unsplash</a></span>`;
 
     return checkBrightness(imageUrl);
 }
@@ -675,8 +678,10 @@ $("#savedPalettes").on("click", "button", function() {
     } 
 });
 
-/*
-$("#submitColor").on("click", function(event) {
-    
-});
-*/
+
+
+while (!backgroundImages) {
+    console.log('waiting on background images')
+}
+console.log('LOADED')
+showNewColors();
