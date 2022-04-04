@@ -53,23 +53,23 @@ let hslPalette = {
     sorted: [[143, 9, 17], [2, 81, 43], [181, 34, 45], [179, 44, 65], [46, 91, 95]]
 };
 
-// Remove dom element from view but not the consumed space
-var hideElement = function (element) {
+// Remove dom element from view and the consumed space
+const hideElement = function (element) {
     $(element).removeClass( "visible" ).addClass( "invisible" );
 };
 
 // Remove dom element from view but not the consumed space
-var hideContent = function (element) {
+const hideContent = function (element) {
     $(element).removeClass( "visible" ).addClass( "hidden" );
 };
 
 // Make the targeted element visible
-var showContent = function (element) {
+const showContent = function (element) {
     $(element).removeClass( "hidden invisible" ).addClass( "visible" );
 };
 
 //Remove the Dom element with the matching selector
-var removeElement = function (selector) {
+const removeElement = function (selector) {
     var element = document.querySelector(selector);
     if(element){
         element.remove();
@@ -77,12 +77,12 @@ var removeElement = function (selector) {
 };
 
 // Save Array of Palettes to local storage
-var updateLocalStorage = function () {
+const updateLocalStorage = function () {
     localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
 };
 
 // Load saved content from local storage back to the app
-var loadLocalStorage = function () {
+const loadLocalStorage = function () {
     //Get saved palettes from localStorage.
     savedPalettes = localStorage.getItem("savedPalettes");
   
@@ -94,9 +94,26 @@ var loadLocalStorage = function () {
     }
 };
 
+//convert hex color to rgb
+//Function from https://convertingcolors.com/blog/article/convert_hex_to_rgb_with_javascript.html
+String.prototype.convertToRGB = function(){
+    if(this.length != 6){
+        //throw "Only six-digit hex colors are allowed.";
+        showContent($("colorInputAlert"));
+    }
+
+    var aRgbHex = this.match(/.{1,2}/g);
+    var aRgb = [
+        parseInt(aRgbHex[0], 16),
+        parseInt(aRgbHex[1], 16),
+        parseInt(aRgbHex[2], 16)
+    ];
+    return aRgb;
+};
+
 // Display saved palettes
 // Function call commented out.  Still working on background color setting
-var showSavedPalettes = function (updated) {
+const showSavedPalettes = function (updated) {
     var i=0
 
     //Save button was clicked
@@ -145,7 +162,7 @@ var showSavedPalettes = function (updated) {
 };
 
 // Function to show user the locked status, calls from anonymous onclick function
-var displayLockedStatus = function (locked, i) {
+const displayLockedStatus = function (locked, i) {
    var selector = "[data-locked=" + i + "]";
     var iconEL = $(selector);
     if(locked) {
@@ -182,16 +199,26 @@ const randomNum = function(min, max) {
   }
 
 // Request a new color palette from Colormind API 
-const requestColorPalette = function() {
+const requestColorPalette = function(userColor) {
     
     // CORS anywhere helps GitHub Pages accept http fetch requests
     // If this ever stops working, check out the console log for a link to follow to be granted temporary access again
     let corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
     var apiUrl = "http://colormind.io/api/";
     let url = corsAnywhereUrl + apiUrl;
-    var data = {
+    let data = {
         model : "default",
         input : ["N","N","N","N","N"]
+    }
+
+    if(userColor)    {
+        for (let i=0; i < palette.length; i++) {
+            if (!palette[i].locked) {
+                // Update locked colors into data.input
+                data.input[i] = userColor;
+                break;
+            }
+        }
     }
 
     // Check palette to see if any colors are locked
@@ -266,18 +293,33 @@ const showNewColors = function(fromSaved) {
         let s = palette[6].sortedHsl[i][1];
         let l = palette[6].sortedHsl[i][2];
 
-        let updateClass = document.querySelectorAll(`.color${i+1}`);
+        // Update all text color classes
+        let updateClass = document.querySelectorAll(`.text${i+1}`);
         updateClass.forEach(function(element) {
-            if (i != 4) {
-                element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-                element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;
-            } else {
-                element.style.color = `hsl(${h}, ${s}%, ${l}%)`;
-            }            
+            element.style.color = `hsl(${h}, ${s}%, ${l}%)`;  
+        });
+
+        // Update all background color classes
+        updateClass = document.querySelectorAll(`.background${i+1}`);
+        updateClass.forEach(function(element) {
+            element.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;  
+        });
+
+        // Update all background overlay color classes
+        updateClass = document.querySelectorAll(`.overlay${i+1}`);
+        let sortedRgb = HSLToRGB(parseInt(h), parseInt(s), parseInt(l));
+        updateClass.forEach(function(element) {
+            element.style.background = `linear-gradient(rgba(${sortedRgb[0]}, ${sortedRgb[1]}, ${sortedRgb[2]}, 0.50), rgba(${sortedRgb[0]}, ${sortedRgb[1]}, ${sortedRgb[2]}, 0.50))`;
+        });
+
+        // Update all border color classes
+        updateClass = document.querySelectorAll(`.border${i+1}`);
+        updateClass.forEach(function(element) {
+            element.style.borderColor = `hsl(${h}, ${s}%, ${l}%)`;  
         });
 
         if (i === 2 || i === 3) {
-            updateText(i);
+            updateButtonText(i);
         }
 
         // Update SVG icons
@@ -288,7 +330,7 @@ const showNewColors = function(fromSaved) {
     return updateBackground(fromSaved);
 }
 
-const updateText = function(i) {
+const updateButtonText = function(i) {
 
     // Colors brightness
     let l = palette[6].sortedHsl[i][2];
@@ -298,18 +340,10 @@ const updateText = function(i) {
     updateTextDark.forEach(function(element) {
         // Particular color needs dark text
         if (parseInt(l) > 45) {
-            let textH = palette[6].sortedHsl[0][0]
-            let textS = palette[6].sortedHsl[0][1]
-            let textL = palette[6].sortedHsl[0][2]
-
             element.style.color = `black`;
         }
         // Particular color needs light text
         else {
-            let textH = palette[6].sortedHsl[4][0]
-            let textS = palette[6].sortedHsl[4][1]
-            let textL = palette[6].sortedHsl[4][2]
-
             element.style.color = `white`;
         }
     })
@@ -367,15 +401,11 @@ const updateBackground = function(fromSaved) {
     backgroundEl.style.background = `linear-gradient(rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50), rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.50)), url(${imageUrl}) center center`;
     backgroundEl.style.backgroundSize = 'cover';
 
-    /* LEAVE CODE HERE - WILL UNCOMMENT WHEN WE HAVE FOOTER STYLING
     // Attribute artist of background in footer
-    let el = document.getElementById('~~~~~~UPDATE ME~~~~~~~')
+    let el = document.getElementById('artistCredit')
     let artistUrl = randomImage.user.links.html;
     let artistName = randomImage.user.name;
-    el.innerHTML = `<span>Photo by <a href="${artistUrl}?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">${artistName}</a> on <a href="https://unsplash.com/?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">Unsplash</a></span>`
-    // Update all classes below separated by commas
-    el.classList.add('ADD', 'CLASSES', 'HERE')
-    */
+    el.innerHTML = `<span>Photo by <a href="${artistUrl}?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">${artistName}</a> on <a href="https://unsplash.com/?utm_source=I_made_you_a_palette&utm_medium=referral" target="_blank">Unsplash</a></span>`;
 
     return checkBrightness(imageUrl);
 }
@@ -546,9 +576,41 @@ const getImageLightness = function(imageSrc,callback) {
 }
 
 // Handler for generate palettes button
-const generateHandler = function() {
+const generateHandler = function(event) {
+    event.preventDefault();
+
+    hideElement($("colorInputAlert"));
+    let hexColor = $("#startColor").val().trim();
+    $('#startColor').val('')
+    if (hexColor) {
+
+        // Remove any hashes at the beginning of the user input
+        while (hexColor[0] === '#') {
+            hexColor = hexColor.slice(1)
+        }
+
+        // Taken from https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation
+        // Checks a string for characters matching a hex value - use hexTest.test('your_value_here')
+        let hexTest = /^([0-9A-F]{3}){1,2}$/i;
+        if (hexTest.test(hexColor)) {
+            let rgbConvert = hexColor.convertToRGB();
+            return requestColorPalette(rgbConvert);
+        } 
+        // Hex value is invalid
+        else {
+            // Make alert to user visible for 5 seconds
+            $('#startLabel').attr('class', 'visible');
+            setTimeout(function() {
+                $('#startLabel').attr('class', 'invisible');
+            }, 5000);
+        }
+    }
 
     requestColorPalette();
+
+    if (!errorFlag) {
+        hideElement($("#CORS"));
+    }
 }
 
 // Event listener for the generate button
@@ -572,7 +634,10 @@ $(".saveBtn").on("click", function() {
 });
 
 // Event listener for pPreviously saved palettes when clicked
-$("#savedPalettes").on("click", "span", function() {
+$("#savedPalettes").on("click", "div", function(event) {
+    // guard clause in case trash icon was clicked
+    if (event.className === 'svgTrash') {return};
+
     //reload saved palette
     var index = this.getAttribute("data-saved");
     // Deep copy made so that arrays don't point at same place in memory (so that when savedPalettes is updated palette isn't updated as well)
@@ -587,11 +652,15 @@ $("#savedPalettes").on("click", "span", function() {
 // Event listener for delete button for a saved palette was clicked
 $("#savedPalettes").on("click", "button", function() {
     //Delete saved palette
-    console.log(this);
-    var index = this.getAttribute("data-saved");
-    console.log("index", index);
+
+    let currentContainer = this.parentNode;
+    let parentContainer = currentContainer.parentNode;
+    let index = Array.prototype.indexOf.call(parentContainer.children, currentContainer);
+
+    var dataSavedInt = this.getAttribute("data-saved");
+    console.log("index", dataSavedInt);
     
-    let selector = "div[data-saved=" + index + "]";
+    let selector = "div[data-saved=" + dataSavedInt + "]";
     $(selector).remove();
 
     console.log("savedPalettes.length", savedPalettes.length);
@@ -604,8 +673,15 @@ $("#savedPalettes").on("click", "button", function() {
 
     savedPalettes = tempArray
     updateLocalStorage();
-    console.log("savedPalettes.length", savedPalettes.length);
     if (!errorFlag) {
         hideElement($("#CORS"));
     } 
 });
+
+
+
+while (!backgroundImages) {
+    console.log('waiting on background images')
+}
+console.log('LOADED')
+showNewColors();
