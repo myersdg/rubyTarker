@@ -10,7 +10,7 @@ This application requires the use of a proxy server to properly handle http fetc
 [Click here to view](https://myersdg.github.io/rubyTarker/)
 
 
-https://user-images.githubusercontent.com/89796902/161391450-6fd13d61-7bd9-478d-a3b0-1f36daa7d2c6.mp4
+https://user-images.githubusercontent.com/89796902/161470578-3e4aa714-ebfa-412b-a18a-aa8b48ceff36.mp4
 
 
 ## Made with care
