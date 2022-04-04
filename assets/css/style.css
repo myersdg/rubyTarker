@@ -23,7 +23,8 @@
 }
 
 body {
-    padding-top: 100px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .title-container {
@@ -61,9 +62,13 @@ svg {
 
 /*Style for App background image*/
 .background-img {
+    padding-top: 100px;
+    display: block;
     background-image: url("../images/background.png");
-    height: 100%;
+    height: 100vh;
+    min-height: 667px;
     background-position: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /*Style for generated palette Start*/
@@ -79,6 +84,7 @@ svg {
 .displayHex input {
     width: 80px;
     text-align: center;
+    border-radius: 5px;
 }
 
 #startColor {
@@ -116,6 +122,39 @@ button:hover {
     background-color: #7dcccb;
     color: white;
     font-family: Georgia, Times, "Times New Roman", serif;
+    max-height: 38.4px;
+}
+
+#colorForm {
+    position: relative;
+    display: flex;
+}
+
+#startColor {
+    position: absolute;
+    top: -28.5px;
+    left: -13.475px;
+    text-align: center;
+    height: 25px;
+    max-width: 110px;
+}
+
+#generate-colors {
+    position: absolute;
+}
+
+#startLabel {
+    position: absolute;
+    top: -47.8px;
+    left: -18px;
+    text-align: center;
+    font-weight: normal;
+    color: red;
+    background-color: rgba(255, 255, 255, 0.50);
+    border-radius: 5px;
+    margin: auto;
+    min-width: 120px;
+    font-size: 14px;
 }
 
 .svgLock {
@@ -167,6 +206,10 @@ button:hover {
     font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
+.savedpal {
+    font-size: 25px;
+}
+
 .saved-container, #formDiv {
     padding: 10px;
     border-color: #4b9899 !important;
@@ -193,20 +236,29 @@ button:hover {
 }
 
 .text-border {
-    border: 3px solid #4b9899;
     border-radius: 20px;
     background-color: #4b9899;
-    padding: 15px;
+    padding: 25px 15px;
     width: 30%;
     min-width: 330px;
-    margin: auto;
-    margin-top: 40px;
 }
 
 .textExample, p {
     color: white;
     text-align: center;
     font-size: large;
+}
+
+.textExample {
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.example-container {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .lzdog1 {
@@ -273,6 +325,108 @@ button:hover {
     font-variant: normal;
     text-transform: none;
 }
+
+.example-page-container {
+    padding: 100px 60px;
+    margin: 0px;
+}
+
+.how-it-works {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-bottom: 60px;
+    padding: 0px 20px 10px 20px;
+    border-radius: 40px;
+}
+
+.how-it-works h2 {
+    font-size: 44px;
+    padding: 20px 25px;
+    margin: 20px auto 5px auto;
+    border-radius: 60px 60px
+}
+
+.how-step {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.how-step:first-of-type {
+    border-radius: 40px 40px 10px 10px;
+}
+
+.how-step:last-of-type {
+    border-radius: 10px 10px 40px 40px;
+}
+
+.how-step h3 {
+    font-size: 28px;
+    padding: 25px 10px 15px 10px;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.how-step p {
+    padding: 0 40px 25px 40px;
+}
+
+.how-step h3,
+.how-step p {
+    text-align: left;
+}
+
+.proxy-explain-container {
+    margin: 0 10%;
+    padding: 25px;
+    border-radius: 40px;
+}
+
+.proxy-explain {
+    border-radius: 40px;
+    padding: 15px;
+}
+
+.proxy-explain:first-of-type {
+    margin-bottom: 25px;
+}
+
+.proxy-explain-container h2 {
+    font-size: 34px;
+}
+
+.proxy-explain h3 {
+    font-size: 24px;
+    text-align: right;
+}
+
+.proxy-explain p {
+    text-align: left;
+}
+
+footer {
+    height: 70px;
+    margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slogan {
+    text-align: right;    
+}
+
+footer span {
+    font-size: 18px;
+    padding: 10px;
+}
+
+footer span a {
+    color: white;
+}
+
 /* Example Palette Usage End*/
 
 /*Utility classes Start*/
@@ -293,3 +447,61 @@ button:hover {
     position: relative;
 }
 /*Utility classes End*/
+
+/* Media Queries */
+
+@media only screen and (max-width: 768px) {
+
+    .example-page-container {
+        padding: 60px 10px 0 10px;
+    }
+
+    .how-it-works {
+        padding: 0px 5px 10px 5px;
+        margin: 0 0 30px 0;
+    }
+
+    .proxy-explain-container {
+        margin: 0 0 30px 0;
+    }
+
+    .proxy-explain {
+        padding-bottom: 20px;
+    }
+
+    .proxy-explain h3 {
+        text-align: center;
+    }
+
+    .saved-container {
+        margin-bottom: 50px !important;
+    }
+
+    footer {
+        padding: 10px 0px;
+        height: auto;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .slogan {
+        display: inline-block;
+        margin: 10px auto 0 auto;
+        text-align: center;
+    }
+
+    #artistCredit {
+        display: inline-block;
+        text-align: center;
+        margin: auto;
+    }
+
+    .displayHex input {
+        font-size: 14px;
+        width: 70px;
+    }
+
+    .palette {
+        margin: 90px 0 20px 0;
+    }
+}
